@@ -1,3 +1,4 @@
+//vectors format: Map[string(topic_id): List[float]]
 function get2DVectors(vectors, successCallback){
     var request = $.ajax({
         url: "/get2DVectors",
@@ -14,7 +15,7 @@ function get2DVectors(vectors, successCallback){
       });
 }
 
-// docs format: List[List[string]]
+// docs format: List[List[string(word)]]
 function getWord2VecClusters(docs, successCallback){
     var request = $.ajax({
         url: "/get2DVectors",
