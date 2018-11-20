@@ -1,6 +1,6 @@
 from flask import Flask, request, send_from_directory
 from flask import jsonify
-from sklearn.decomposition import PCA
+# from sklearn.decomposition import PCA
 
 app = Flask(__name__)
 indexUrl = "http://127.0.0.1:9200/java_sections_swastik"
@@ -38,3 +38,10 @@ def get_pca(data):
     reduced_dims_vect = pca.fit_transform(data_vect)
     reduced_dims_data = [(sent[i], reduced_dims_vect[i]) for i in range(len(sent))]
     return reduced_dims_data
+
+
+if __name__ == "__main__":
+    # Setting debug to True enables debug output. This line should be
+    # removed before deploying a production app.
+    app.debug = True
+    app.run(port=5000)
