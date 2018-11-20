@@ -230,3 +230,20 @@
   position: absolute;
   height: 0;
   overflow: hidden; }
+
+.axis text {
+  font: 10px sans-serif; }
+
+.axis line,
+.axis path {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges; }
+
+.path-line {
+  fill: none;
+  stroke: yellow;
+  stroke-width: 1.5px; }
+
+svg {
+  background: #f0f0f0; }

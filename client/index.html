@@ -37,7 +37,14 @@
                     </div>
                 <!-- Site content !-->
                     <div class="container">
-                        <div id="page1" v-if="selectedPage == 1">Page 1</div>
+                        <div class="row" id="page1" v-if="selectedPage == 1">
+                            <div class="col-md-6">
+                            </div>
+
+                            <div class="col-md-6" id="stacked-bar">
+                            </div>
+                        </div>
+
                         <div id="page2" v-if="selectedPage == 2">Page 2</div>
                         <div id="page3" v-if="selectedPage == 3">Page 3</div>
                     </div>
