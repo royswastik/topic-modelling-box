@@ -11,3 +11,7 @@ function generateTopicVectors(){
     }
 }
 
+function generateParallelCoordinateData(){
+    var words = window.topic_word_probability_in_topic;
+}
+
