@@ -6,6 +6,7 @@ function loadD3(){
             window.topic_word_distribution_in_corpora= y;
             d3.csv("data/document_topic_probability.json", function(z){
                 window.topic_word_probability_in_topic = z;
+                generateTopicVectors(); //Loads vectors in window.topicVectors
                 loadVisualizations();
             });
         });
