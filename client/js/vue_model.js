@@ -13,6 +13,15 @@ window.vueApp = new Vue({
     methods: {
         selectPage: function(x){
             this.selectedPage = x;
+            if (x == 1){
+                initPage1();
+            }
+            if (x == 2){
+                initPage2();
+            }
+            if (x == 3){
+                initPage3();
+            }
         }
     },
     mounted: function(){
