@@ -12,73 +12,12 @@
   <body>
     <div id="container-fluid" style=" margin-bottom: 50px;">
             <nav id="navbar-example2" class="navbar navbar-dark bg-dark bg-light">
-            <a class="navbar-brand" href="#">Data Visualization - Homework 3</a>
+            <a class="navbar-brand" href="#">Final Project</a>
             </nav>
     </div>
     <div class="container">
-        <div class="row">
-            <div class="col-xs-12">
-                <h3>Datamap Visualization of US State Wise Flight Availability</h3>
-                <p class="lead">Name: Swastik Roy</p>
-                <p class="lead">10/14/2018 | Data Visualization</p>
-            </div>
-        </div>
-        <div class="row" id="vue-app">
-            <div class="col-xs-6">
-                <h5 class="text-center">Map Overview</h5>
-                <div class="">
-                    <div id="toggle-options" style="font-size: 0.8em;">
-                            <div class="radio">
-                                <label v-on:click="selectedMap = 1"><input type="radio" name="optradio" checked>Flight Availability from each states - Flow Map</label>
-                            </div>
-                            <div class="radio">
-                                <label v-on:click="selectedMap = 2"><input type="radio" name="optradio">Flight Availability from each states - Chloropleth</label>
-                            </div>
-                            <div class="radio disabled">
-                                <label v-on:click="selectedMap = 3"><input type="radio" name="optradio">Per Capita Flight Availability from each states- Chloropleth</label>
-                            </div>
-                    </div>
-                    <div v-bind:class="{ hidden: (selectedMap != 1) }">
-                        <div id="mapid"></div>
-                    </div>
-                    <div v-bind:class="{ hidden: (selectedMap != 2) }">
-                        <div id="mapid2"></div>
-                    </div>
-                    <div v-bind:class="{ hidden: (selectedMap != 3) }">
-                        <div id="mapid3"></div>
-                    </div>
-                    <!-- <div id="chart" style="width:540px;">
-                        <svg height="1000" width="600">
-                        </svg>
-                    </div> -->
-                </div>
-            </div>
-            <div class="col-xs-6">
-                <h5 class="text-center">Detail View</h5>
-                <h6 v-bind:class="{ hidden: (!noneSelected) }">No US state selected.</h6>
-                <div id="chart-detail" class="text-center"  v-bind:class="{ hidden: (noneSelected) }">
-                    <h6 style="margin-bottom: -30px;">Destinations from the {{selectedState}} state:</h6>
-                    <div id="pie1"></div>
-                    <h6 style="margin-top: -60px;">Origin Cities in the {{selectedState}} state:</h6>
-                    <div id="pie2" style="margin-top: -80px;"></div>
-                </div>
-            </div>
-        </div>
-        <div class="row" id="writeUp">
-                <hr />
-                <div class="col-xs-12">
-                </div>
-            </div>
-        <div class="container">
-            <div class="row">
-                <div class="col-md-12 text-center">
-                        <br /><br />
-                    <p class="mb-0">© 2018 Copyright |&nbsp; Swastik Roy</p>
-                    <br />
-                </div>
-            </div>
-        </div>
-
+        
+ 
 
     </div>
 
