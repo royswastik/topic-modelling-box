@@ -14,6 +14,7 @@ function get2DVectors(vectors, successCallback){
       });
 }
 
+// docs format: List[List[string]]
 function getWord2VecClusters(docs, successCallback){
     var request = $.ajax({
         url: "/get2DVectors",
