@@ -12,6 +12,8 @@ function generateTopicVectors(){
 }
 
 function generateParallelCoordinateData(){
-    var words = window.topic_word_probability_in_topic;
+    var words = window.word_distribution_in_corpora.keys();
+    var topic_word_threshold = 0.3;
+    window.topic_word_probability ={};
 }
 
