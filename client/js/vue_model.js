@@ -3,14 +3,21 @@ window.vueApp = new Vue({
     data: {
         message: 'Hello user!',
         noneSelected: true,
-        selectedState: "",
+        selectedPage: 1,
         playerDetail: {
             name: "<Player Name>"
         },
         overviewFilters: {},
         selectedMap: 1
     },
+    methods: {
+        selectPage: function(x){
+            this.selectedPage = x;
+        }
+    },
     mounted: function(){
+        console.log("Mounted");
         loadD3();
+        loadJquery();
     }
 });
