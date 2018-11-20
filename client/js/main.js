@@ -5,7 +5,7 @@ function loadD3(){
         d3.csv("data/document_topic_probability.json", function(y){
             window.topic_word_distribution_in_corpora= y;
             d3.csv("data/topic_word_probability_in_topic.json", function(z){
-                window.topic_word_probability_in_topic = z;
+                window.topic_word_probability = z;
                 generateTopicVectors(); //Loads vectors in window.topicVectors
                 loadVisualizations();
             });
