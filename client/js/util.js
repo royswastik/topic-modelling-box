@@ -15,8 +15,7 @@ function generateParallelCoordinateData(){
     var words = window.word_distribution_in_corpora.keys();
     var topic_word_threshold = 0.3;
     window.topic_word_probability.map(x => {
-
+        
     });
-
 }
 

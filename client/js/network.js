@@ -14,3 +14,19 @@ function get2DVectors(vectors, successCallback){
       });
 }
 
+function getWord2VecClusters(docs, successCallback){
+    var request = $.ajax({
+        url: "/get2DVectors",
+        method: "POST",
+        data: {docs: docs}
+      });
+       
+      request.done(function( response ) {
+        successCallback(response);
+      });
+       
+      request.fail(function( jqXHR, textStatus ) {
+        alert( "Request failed: " + textStatus );
+      });
+}
+
