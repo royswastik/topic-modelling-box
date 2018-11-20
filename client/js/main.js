@@ -6,6 +6,7 @@ function loadD3(){
             window.topic_word_distribution_in_corpora= y;
             d3.csv("data/topic_word_probability_in_topic.json", function(z){
                 window.topic_word_probability_in_topic = z;
+                generateTopicVectors(); //Loads vectors in window.topicVectors
                 loadVisualizations();
             });
         });
@@ -84,7 +85,7 @@ function initPage1(topic_number){
 //var key = ["TEXT01","TEXT02", "TEXT03", "TEXT04","DIFF01","DIFF02", "DIFF03", "DIFF04","DIFF05","ETCH01","ETCH02", "ETCH03", "ETCH04", "ETCH05","ANNL01","ANNL02", "ANNL03", "ANNL04", "ANNL05","FCOT01","FCOT02", "FCOT03", "FCOT04", "FCOT05", "PRNT01A", "PRNT01B", "PRNT02A", "PRNT02B", "PRNT01A", "PRNT03B", "PRNT04A", "PRNT04B"];
   
 	var key = ["01","02"];
-
+	debugger
 	initStackedBarChart.draw({
 		data: data,
 		key: key,
@@ -99,5 +100,5 @@ function initPage2(){
 }
 
 function initPage3(){
-
+    loadParallelCoordinate();
 }
