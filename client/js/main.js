@@ -8,6 +8,7 @@ function loadD3(){
                 window.topic_word_probability = z;
                 generateTopicVectors(); //Loads vectors in window.topicVectors
                 loadVisualizations();
+
             });
         });
     });
@@ -19,11 +20,9 @@ function loadVisualizations(){
 
 // pass integer of topic_number
 function initPage1(topic_number){
-
 	var topic_words = window.document_topic_probability;
-	var corpus_words = window.topic_word_distribution_in_corpora;
 	var data = window.topic_word_probability;
-	var topic_distribution_in_corpa = window.topic_word_distribution_in_corpora;
+	var topic_distribution_in_corpa = window.word_distribution_in_corpora;
 
 	var final_data =[];
 	var data = data[topic_number][0];

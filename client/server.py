@@ -2,14 +2,14 @@ from flask import Flask, request, send_from_directory
 from flask import jsonify
 # from sklearn.decomposition import PCA
 
-from gensim.test.utils import common_texts, get_tmpfile
-from gensim.models import Word2Vec
+# from gensim.test.utils import common_texts, get_tmpfile
+# from gensim.models import Word2Vec
 import numpy as np
-from sklearn.cluster import KMeans
-from sklearn import metrics
-from sklearn.utils import check_random_state
-from sklearn.metrics.pairwise import distance_metrics
-from sklearn.metrics.pairwise import pairwise_distances
+# from sklearn.cluster import KMeans
+# from sklearn import metrics
+# from sklearn.utils import check_random_state
+# from sklearn.metrics.pairwise import distance_metrics
+# from sklearn.metrics.pairwise import pairwise_distances
 
 app = Flask(__name__)
 indexUrl = "http://127.0.0.1:9200/java_sections_swastik"
