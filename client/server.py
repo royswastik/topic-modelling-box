@@ -66,7 +66,7 @@ def cosine(u, v):
     return np.dot(u, v) / (np.linalg.norm(u) * np.linalg.norm(v))
 
 def getWord2VecClusters(docs):
-    model = Word2Vec(common_texts, size=100, window=5, min_count=1, workers=4)
+    model = Word2Vec(docs, size=100, window=5, min_count=1, workers=4)
 
     def make_clusters(embeddings, texts):
         kmeans_model = 0
