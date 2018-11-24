@@ -3,11 +3,7 @@ function loadD3(){
     d3.json("data/document_topic_probability.json", function(x){
         window.document_topic_probability= x;
         d3.json("data/topic_word_distribution_in_corpora.json", function(y){
-<<<<<<< HEAD
-            window.topic_word_distribution_in_corpora= y;
-=======
             window.word_distribution_in_corpora= y;
->>>>>>> 9ede90cd44f8a013d801646498c0d6517eb8e936
             d3.json("data/topic_word_probability_in_topic.json", function(z){
                 window.topic_word_probability = z;
                 generateTopicVectors(); //Loads vectors in window.topicVectors
