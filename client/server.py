@@ -80,15 +80,14 @@ def getWord2VecClusters(docs):
                 silhoutte = metrics.silhouette_score(embeddings, kmeans_model_tmp.labels_, metric='cosine')
                 print("Silhoutte for k="+str(k)+" is "+str(silhoutte))
                 if silhoutte > best_silhoutte :
-                kmeans_model = kmeans_model_tmp
-                print("best k updated = "+str(best_k)+" -> "+str(k))
-                print("best silhoutte updated = "+str(old_silhoutte)+" -> "+str(silhoutte))
-                best_k = k
-                best_silhoutte = silhoutte
-                labels = kmeans_model_tmp.labels_
-                centroids = kmeans_model_tmp.cluster_centers_
-
-                old_silhoutte = silhoutte
+                    kmeans_model = kmeans_model_tmp
+                    print("best k updated = "+str(best_k)+" -> "+str(k))
+                    print("best silhoutte updated = "+str(old_silhoutte)+" -> "+str(silhoutte))
+                    best_k = k
+                    best_silhoutte = silhoutte
+                    labels = kmeans_model_tmp.labels_
+                    centroids = kmeans_model_tmp.cluster_centers_
+                    old_silhoutte = silhoutte
                 
         print("best k = "+str(best_k))
         print(labels)   #[1 0 1 0 2 1 0 1] Sample Output for labels\
@@ -120,14 +119,15 @@ def getWord2VecClusters(docs):
                 embeddings.append(emb)
                 res["word_embeddings"].append((word,labels[index],emb))
                 topic = labels[index]
+
                 if topic not in res["topic_word"]:
-                res["topic_word"][topic] = {}
-                res["topic_word"][topic][word] = cosine(res["topic_embeddings"][topic], emb)
+                    res["topic_word"][topic] = {}
+                    res["topic_word"][topic][word] = cosine(res["topic_embeddings"][topic], emb)
 
         for index, topic in enumerate(res["topic_word"].keys()):
                 emb = res["topic_embeddings"][topic]
                 for doc_index, doc_emb in enumerate(res["document_embeddings"]):
-                if topic not in res["document_topic"]:
+                    if topic not in res["document_topic"]:
                         res["document_topic"][doc_index] = {}
                 res["document_topic"][doc_index][topic] = cosine(res["topic_embeddings"][topic], doc_emb)
         return res
