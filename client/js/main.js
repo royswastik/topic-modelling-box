@@ -20,6 +20,7 @@ function loadVisualizations(){
 
 // pass integer of topic_number
 function initPage1(topic_number){
+
 	var topic_words = window.document_topic_probability;
 	var data = window.topic_word_probability;
 	var topic_distribution_in_corpa = window.word_distribution_in_corpora;
@@ -38,8 +39,9 @@ function initPage1(topic_number){
 		final_data.push(temp);
 	}
 	var data = final_data;
-	var svg = d3.select("#stacked-bar"),
-    margin = {top: 20, right: 20, bottom: 30, left: 40},
+  var height =data.length * 20;  
+	var svg = d3.select("#stacked-bar").append("svg").attr("width", 960).attr("height",height),
+    margin = {top: 20, right: 20, bottom: 30, left: 50},
     width = +svg.attr("width") - margin.left - margin.right,
     height = +svg.attr("height") - margin.top - margin.bottom,
     g = svg.append("g").attr("transform", "translate(" + margin.left + "," + margin.top + ")");
