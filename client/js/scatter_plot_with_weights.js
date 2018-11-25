@@ -1,5 +1,5 @@
 function renderClusterAnalysis(resp) {
-  d3.select("#cluster_id").remove();
+  d3.select(".chart12").remove();
   var document_topic = resp["document_topic"][0];
   var topic_vectors = resp["topic_vectors"];
   var bb = document.querySelector('#cluster')
@@ -24,7 +24,7 @@ function renderClusterAnalysis(resp) {
 
   var svg = d3.select('#cluster')
     .append('svg')
-    .attr('class', 'chart')
+    .attr('class', 'chart12')
     .attr('id','cluster_id')
     .attr("width", width + margin + margin)
     .attr("height", height + margin + margin)

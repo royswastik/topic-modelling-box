@@ -3,7 +3,7 @@ window.vueApp = new Vue({
     data: {
         message: 'Hello user!',
         noneSelected: true,
-        selectedPage: 3,
+        selectedPage: 2,
         playerDetail: {
             name: "<Player Name>"
         },
@@ -17,7 +17,7 @@ window.vueApp = new Vue({
                 initPage1(window.global_data);
             }
             if (x == 2){
-                initPage2();
+                initPage2(window.global_data);
             }
             if (x == 3){
                 initPage3();
