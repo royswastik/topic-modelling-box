@@ -1,5 +1,13 @@
+require.config({
+    paths: {
+        "d3": "https://d3js.org/d3.v3.min"
+    }
+});
+
 function loadD3(){
-    console.log("hello");
+    require(['d3'], function(d3V3) {
+        window.d3V3 = d3V3;
+    });
     d3.json("data/document_topic_probability.json", function(x){
         window.document_topic_probability= x;
         d3.json("data/topic_word_distribution_in_corpora.json", function(y){

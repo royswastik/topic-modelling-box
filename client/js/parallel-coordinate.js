@@ -11,7 +11,7 @@ function loadParallelCoordinate(){
         background,
         foreground;
 
-    var svg = d3.select("#parallel-coordinate-vis").append("svg")
+    var svg = d3V3.select("#parallel-coordinate-vis").append("svg")
         .attr("width", width + margin.left + margin.right)
         .attr("height", height + margin.top + margin.bottom)
     .append("g")
@@ -25,14 +25,14 @@ function loadParallelCoordinate(){
     , function(resp) {
     // Extract the list of dimensions and create a scale for each.
     var cars = generateParallelCoordinateData(resp, 0, 0);
-    // var axisD = d3.svg.axis().orient("left").ticks(Object.keys(resp["document_topic"]).length),
-    var axisD = d3.svg.axis().orient("left").tickValues(Object.keys(resp["document_topic"]).map(x => parseInt(x))),
-        axisT = d3.svg.axis().orient("left").tickValues(resp["topics"].map(x => parseInt(x))),
-        axisW = d3.svg.axis().orient("left").tickValues(Object.values(resp["overall_word"]).map(x => parseFloat(x)));
+    // var axisD = d3V3.svg.axis().orient("left").ticks(Object.keys(resp["document_topic"]).length),
+    var axisD = d3V3.svg.axis().orient("left").tickValues(Object.keys(resp["document_topic"]).map(x => parseInt(x))),
+        axisT = d3V3.svg.axis().orient("left").tickValues(resp["topics"].map(x => parseInt(x))),
+        axisW = d3V3.svg.axis().orient("left").tickValues(Object.values(resp["overall_word"]).map(x => parseFloat(x)));
 
-    x.domain(dimensions = d3.keys(cars[0]).filter(function(d) {
-        return d != "name" && (y[d] = d3.scale.linear()
-            .domain(d3.extent(cars, function(p) { return +p[d]; }))
+    x.domain(dimensions = d3V3.keys(cars[0]).filter(function(d) {
+        return d != "name" && (y[d] = d3V3.scale.linear()
+            .domain(d3V3.extent(cars, function(p) { return +p[d]; }))
             .range([height, 0]));
     }));
 
@@ -58,14 +58,14 @@ function loadParallelCoordinate(){
         .enter().append("g")
         .attr("class", "dimension")
         .attr("transform", function(d) { return "translate(" + x(d) + ")"; })
-        .call(d3.behavior.drag()
+        .call(d3V3.behavior.drag()
             .origin(function(d) { return {x: x(d)}; })
             .on("dragstart", function(d) {
             dragging[d] = x(d);
             background.attr("visibility", "hidden");
             })
             .on("drag", function(d) {
-            dragging[d] = Math.min(width, Math.max(0, d3.event.x));
+            dragging[d] = Math.min(width, Math.max(0, d3V3.event.x));
             foreground.attr("d", path);
             dimensions.sort(function(a, b) { return position(a) - position(b); });
             x.domain(dimensions);
@@ -73,7 +73,7 @@ function loadParallelCoordinate(){
             })
             .on("dragend", function(d) {
             delete dragging[d];
-            transition(d3.select(this)).attr("transform", "translate(" + x(d) + ")");
+            transition(d3V3.select(this)).attr("transform", "translate(" + x(d) + ")");
             transition(foreground).attr("d", path);
             background
                 .attr("d", path)
@@ -95,7 +95,7 @@ function loadParallelCoordinate(){
             } else {
                 axis = axisW;
             }
-            d3.select(this).call(
+            d3V3.select(this).call(
                 axis.scale(y[d])
             );
         })
@@ -110,7 +110,7 @@ function loadParallelCoordinate(){
     g.append("g")
         .attr("class", "brush")
         .each(function(d) {
-            d3.select(this).call(y[d].brush = d3.svg.brush().y(y[d]).on("brushstart", brushstart).on("brush", brush));
+            d3V3.select(this).call(y[d].brush = d3V3.svg.brush().y(y[d]).on("brushstart", brushstart).on("brush", brush));
         })
         .selectAll("rect")
         .attr("x", -8)
@@ -132,7 +132,7 @@ function loadParallelCoordinate(){
     }
 
     function brushstart() {
-    d3.event.sourceEvent.stopPropagation();
+    d3V3.event.sourceEvent.stopPropagation();
     }
 
     // Handles a brush event, toggling the display of foreground lines.
