@@ -33,6 +33,7 @@ function getAnalysis(text, method) {
     fnc = getWord2VecClusters;
   }
   fnc(docs, resp => {
+    window.global_data = resp;
     initPage1(resp);
     initPage2(resp);
     initPage3(resp);
