@@ -132,7 +132,7 @@ def getLDA_TopicClusters():
             dict4[k] = v        
         
 
-    data = {"document_topic" : dict1, "topic_word" : dict2, "topics" : topics_list, "topic_vectors" : dict3, "word_distribution" : dict4, "words" : words}
+    data = {"document_topic" : dict1, "topic_word" : dict2, "topics" : topics_list, "topic_vectors" : dict3, "overall_word" : dict4, "words" : words}
 
     try:
         data1 = json.dumps(data, default = myconverter)
