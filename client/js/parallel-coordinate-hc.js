@@ -1,9 +1,6 @@
 function loadParallelCoordinatesHC(resp){
 
-    getWord2VecClusters([
-			["food", "apple", "banana",  "biscuit",  "chicken"],
-			["cricket", "football", "baseball",  "tennis"]
-		]
+    getWord2VecClusters(window.documents
     , function(resp) {
         let data = generateParallelCoordinateDataHC(resp, 0, 0);
         Highcharts.chart('pc-container', {
