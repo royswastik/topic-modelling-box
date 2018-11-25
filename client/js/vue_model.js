@@ -22,6 +22,9 @@ window.vueApp = new Vue({
             if (x == 3){
                 initPage3();
             }
+            if (x == 4){
+                initPage4();
+            }
         }
     },
     mounted: function(){

@@ -7,6 +7,15 @@ from gensim.models import Word2Vec
 import numpy as np
 from sklearn.cluster import KMeans
 from sklearn import metrics
+import pandas as pd
+from nltk.tokenize import RegexpTokenizer
+from stop_words import get_stop_words
+from nltk.stem.porter import PorterStemmer
+from gensim import corpora, models
+import gensim
+from sklearn.decomposition import PCA
+from collections import Counter
+import operator
 app = Flask(__name__)
 
 @app.route('/')
@@ -41,6 +50,95 @@ def getWord2Vec_TopicClusters():
     res = getWord2VecClusters(docs)
     return jsonify(res)
 
+@app.route("/api/getLDAData", methods=['POST'])
+def getLDA_TopicClusters():
+    post = request.get_json()
+    print(post)
+    docs = post["docs"]
+    tokenizer = RegexpTokenizer(r'\w+')
+    en_stop = get_stop_words('en')
+    p_stemmer = PorterStemmer()
+    texts = []
+
+    for i in docs:
+
+        tokens = i
+        stopped_tokens = [i for i in tokens if not i in en_stop]
+        texts.append(stopped_tokens)
+
+    dictionary = corpora.Dictionary(texts)
+    
+    corpus = [dictionary.doc2bow(text) for text in texts]
+    ldamodel = gensim.models.ldamodel.LdaModel(corpus, num_topics=10, id2word = dictionary)
+
+    words = [item for sublist in texts for item in sublist]
+
+    counts = Counter(words)
+
+    counts = dict(counts)
+
+    max_freq = max(counts.items(), key=operator.itemgetter(1))[1]
+    min_freq = min(counts.items(), key=operator.itemgetter(1))[1]
+
+    frequency_distribution = {k: ((v - min_freq + 0.000000001)/ (max_freq - min_freq + + 0.000000001)) for k, v in counts.items()}
+
+    t7 = []
+
+    i = 0
+    for d in docs :
+        bow = dictionary.doc2bow(d)
+        topics = ldamodel.get_document_topics(bow) 
+        data1 = {i : dict(ldamodel.get_document_topics(bow))}
+        t7.append(data1)
+        i = i + 1
+   
+    dict1 = {}
+    for i in range(0, len(t7)):
+        dict1[i] = t7[i][i]
+    
+    i = 0
+
+    t9 = []
+    topics_list = []
+    for i in range(0,10) :
+        tupple_dict_topic_word_prob_in_topic = {i: dict(ldamodel.show_topic(i))}
+        topics_list.append(str(i))
+        t9.append(tupple_dict_topic_word_prob_in_topic)
+        i = i + 1
+
+    dict2= {}
+    for i in range(0, len(t9)):
+        dict2[i] = t9[i][i]
+    
+    topics = ldamodel.get_topics()
+    pca = PCA(n_components=2)
+    pca_new = pca.fit_transform(topics)
+
+    topic_vectors = pca_new.tolist()
+
+    dict3= {}
+    for i in range(0, len(topic_vectors)):
+        dict3[i] = topic_vectors[i]
+    
+    word_distribution_list = []
+    for word in words :
+        word_distribution = { word : frequency_distribution.get(word)}
+        word_distribution_list.append(word_distribution)
+
+    dict4= {}
+    for i in range(0, len(word_distribution_list)):
+        new_dict = word_distribution_list[i]
+        for k, v in new_dict.items():
+            dict4[k] = v        
+        
+
+    data = {"document_topic" : dict1, "topic_word" : dict2, "topics" : topics_list, "topic_vectors" : dict3, "word_distribution" : dict4, "words" : words}
+
+    try:
+        data1 = json.dumps(data, default = myconverter)
+    except Exception as e:
+        print ("Exception", e)
+    return data1
 
 def get_pca(data):
     sent = [v[0] for v in data]
@@ -185,6 +283,9 @@ def stringify_keys(d):
             del d[key]
     return d
 
+def myconverter(o):
+    if isinstance(o, np.float32):
+        return float(o)
 
 if __name__ == "__main__":
     # Setting debug to True enables debug output. This line should be

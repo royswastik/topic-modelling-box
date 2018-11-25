@@ -24,20 +24,23 @@
     <div id="vue-app">
             <div class="ui sidebar inverted vertical menu">
                     <a class="item" v-on:click="selectPage(1)">
-                        1
+                        Topic Word Relationship
                     </a>
                     <a class="item" v-on:click="selectPage(2)">
-                        2
+                        Inverse Word Topic Relationship
                     </a>
                     <a class="item" v-on:click="selectPage(3)">
-                        3
+                        Correlation Analysis
+                    </a>
+                    <a class="item" v-on:click="selectPage(4)">
+                        Word Analysis
                     </a>
                     </div>
                 <div class="pusher">
                     <div id="container-fluid" style=" margin-bottom: 50px;">
                             <nav id="navbar-example2" class="navbar navbar-dark bg-dark bg-light">
                             <a class="navbar-brand" href="#">Final Project</a>
-                            <a id="toggle-sidebar" style="cursor:pointer; color:white;">toggle</a>
+                            <a id="toggle-sidebar" style="cursor:pointer; color:white;">Toggle Menu</a>
                             </nav>
                     </div>
                 <!-- Site content !-->
@@ -69,6 +72,12 @@
                                 <div id="pc-container" style="height: 1000px;"></div>
                             </div>
                         </div>
+                        <div id="page4" v-bind:class="{ 'hidden': selectedPage != 4 }">
+                            <div id="overall-wc" style="height: 300px;"></div>
+                            <div class="row" id="topic-wcs">
+
+                            </div>
+                        </div>
                     </div>
             
                 </div>
@@ -98,7 +107,9 @@
  crossorigin=""></script>
     <!-- Load animation tweening lib requirement for CanvasFlowMapLayer -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/tween.js/16.6.0/Tween.min.js"></script>
+    <script src="https://code.highcharts.com/modules/wordcloud.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js"></script>
+
     <!-- then load CanvasFlowMapLayer -->
    
     <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.9.1/underscore-min.js"></script> -->
