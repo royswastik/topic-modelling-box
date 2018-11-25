@@ -150,7 +150,7 @@ def getWord2VecClusters(docs):
     res = {
         "topic_word": res["topic_word"],
         "document_topic": res["document_topic"],
-        "document_word": res["document_word"],
+        "overall_word": res["document_word"],
         "words": list(words_set),
         "topic_vectors": topic_vectors
     }
