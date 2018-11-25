@@ -14,6 +14,11 @@
   integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
   crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.js"></script>
+      <style>
+          .hidden{
+              display: none !important;
+          }
+      </style>
   </head>
   <body>
     <div id="vue-app">
@@ -37,7 +42,8 @@
                     </div>
                 <!-- Site content !-->
                     <div class="container">
-                        <div class="row" id="page1" v-if="selectedPage == 1">
+                        <div class="row" id="page1" v-bind:class="{ 'hidden': selectedPage != 1 }">
+                            Page 1
                            <div class="col-md-6" id="cluster">
                            </div>
                             <div class="col-md-1">
@@ -46,8 +52,8 @@
                             </div>
                         </div>
 
-                        <div id="page2" v-if="selectedPage == 2">Page 2</div>
-                        <div id="page3" v-if="selectedPage == 3">
+                        <div id="page2" v-bind:class="{ 'hidden': selectedPage != 2 }">Page 2</div>
+                        <div id="page3" v-bind:class="{ 'hidden': selectedPage != 3 }">
                             <div id="parallel-coordinate-vis">
 
                             </div>
@@ -84,7 +90,6 @@
  crossorigin=""></script>
     <!-- Load animation tweening lib requirement for CanvasFlowMapLayer -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/tween.js/16.6.0/Tween.min.js"></script>
-
     <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js"></script>
     <!-- then load CanvasFlowMapLayer -->
    

@@ -3,11 +3,11 @@ function loadParallelCoordinate(){
         width = 960 - margin.left - margin.right,
         height = 500 - margin.top - margin.bottom;
 
-    var x = d3.scale.ordinal().rangePoints([0, width], 1),
+    var x = d3V3.scale.ordinal().rangePoints([0, width], 1),
         y = {},
         dragging = {};
 
-    var line = d3.svg.line(),
+    var line = d3V3.svg.line(),
         background,
         foreground;
 

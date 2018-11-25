@@ -5,8 +5,10 @@ require.config({
 });
 
 function loadD3(){
+    window.d3Old = d3;
     require(['d3'], function(d3V3) {
         window.d3V3 = d3V3;
+        window.d3 = d3Old;
         getAnalysis("asfas", "assad");
           loadParallelCoordinate();
           loadParallelCoordinatesHC();
