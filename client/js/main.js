@@ -5,6 +5,7 @@ require.config({
 });
 
 function loadD3(){
+
     window.d3Old = d3;
     require(['d3'], function(d3V3) {
         window.d3V3 = d3V3;
@@ -32,6 +33,7 @@ function getAnalysis(text, method) {
     fnc = getWord2VecClusters;
   }
   fnc(docs, resp => {
+    window.global_data = resp;
     initPage1(resp);
     initPage2(resp);
     initPage3(resp);
@@ -39,7 +41,6 @@ function getAnalysis(text, method) {
 }
 
 function loadVisualizations() {
-
 }
 
 function initPage1(resp) {
@@ -48,7 +49,8 @@ function initPage1(resp) {
 
 
 
-function initPage2() {
+function initPage2(resp) {
+  renderClusterForceLayout(resp);
 
 }
 
