@@ -269,3 +269,38 @@
 
 #parallel-coordinate-vis #pc-hc g.highcharts-axis-labels > text {
   transform: translateX(30px) !important; }
+
+#inverse-word-topic #speciescollapsible {
+  height: 700px;
+  width: 700px;
+  overflow: hidden; }
+
+#inverse-word-topic .selected {
+  stroke: darkslategray;
+  fill: none;
+  stroke-width: 3px; }
+
+#inverse-word-topic .reset-selected {
+  fill: none;
+  stroke: #ccc;
+  stroke-width: 1.5px; }
+
+#inverse-word-topic .node {
+  cursor: pointer; }
+
+#inverse-word-topic .node text {
+  text-rendering: optimizeLegibility;
+  font: 6px Helvetica, Arial, Verdana, sans-serif;
+  background-color: transparent;
+  color: #333;
+  -webkit-font-smoothing: antialiased; }
+
+#inverse-word-topic .link {
+  fill: none;
+  stroke: #ccc;
+  stroke-width: 1.5px; }
+
+#inverse-word-topic #collapse-button {
+  float: right;
+  margin-right: 10px;
+  margin-top: 20px; }

@@ -30,9 +30,9 @@ function getAnalysis(method) {
   let docs = window.documents;
   let fnc = x => x;
   if (method == "LDA") {
-    fnc = getLDAClusters;
-  } else {
     fnc = getWord2VecClusters;
+  } else {
+    fnc = getLDAClusters;
   }
   fnc(docs, resp => {
       window.global_data = resp;
