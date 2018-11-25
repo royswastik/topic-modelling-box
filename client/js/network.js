@@ -34,3 +34,21 @@ function getWord2VecClusters(docs, successCallback){
       });
 }
 
+function getLDAClusters(docs, successCallback){
+    var request = $.ajax({
+        url: "/api/getClustersWord2Vec",
+        method: "POST",
+        data: JSON.stringify({docs: docs}),
+        contentType: "application/json; charset=utf-8",
+        dataType   : "json"
+      });
+       
+      request.done(function( response ) {
+        successCallback(response);
+      });
+       
+      request.fail(function( jqXHR, textStatus ) {
+        alert( "Request failed: " + textStatus );
+      });
+}
+
