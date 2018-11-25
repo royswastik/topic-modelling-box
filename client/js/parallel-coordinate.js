@@ -8,19 +8,28 @@ function loadParallelCoordinate(){
         dragging = {};
 
     var line = d3.svg.line(),
-        axis = d3.svg.axis().orient("left"),
         background,
         foreground;
 
-    var svg = d3.select("body").append("svg")
+    var svg = d3.select("#parallel-coordinate-vis").append("svg")
         .attr("width", width + margin.left + margin.right)
         .attr("height", height + margin.top + margin.bottom)
     .append("g")
-        .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+        .attr("transform", "translate(" + margin.left + "," + margin.top + ")"), dimensions;
 
-    d3.csv("cars.csv", function(error, cars) {
 
+    getWord2VecClusters([
+			["food", "apple", "banana",  "biscuit",  "chicken"],
+			["cricket", "football", "baseball",  "tennis"]
+		]
+    , function(resp) {
     // Extract the list of dimensions and create a scale for each.
+    var cars = generateParallelCoordinateData(resp, 0, 0);
+    // var axisD = d3.svg.axis().orient("left").ticks(Object.keys(resp["document_topic"]).length),
+    var axisD = d3.svg.axis().orient("left").tickValues(Object.keys(resp["document_topic"]).map(x => parseInt(x))),
+        axisT = d3.svg.axis().orient("left").tickValues(resp["topics"].map(x => parseInt(x))),
+        axisW = d3.svg.axis().orient("left").tickValues(Object.values(resp["overall_word"]).map(x => parseFloat(x)));
+
     x.domain(dimensions = d3.keys(cars[0]).filter(function(d) {
         return d != "name" && (y[d] = d3.scale.linear()
             .domain(d3.extent(cars, function(p) { return +p[d]; }))
@@ -77,11 +86,25 @@ function loadParallelCoordinate(){
     // Add an axis and title.
     g.append("g")
         .attr("class", "axis")
-        .each(function(d) { d3.select(this).call(axis.scale(y[d])); })
+        .each(function(d) {
+            let axis = null;
+            if(d == "document"){
+                axis = axisD;
+            } else if(d == "topic"){
+                axis = axisT;
+            } else {
+                axis = axisW;
+            }
+            d3.select(this).call(
+                axis.scale(y[d])
+            );
+        })
         .append("text")
         .style("text-anchor", "middle")
         .attr("y", -9)
-        .text(function(d) { return d; });
+        .text(function(d) {
+            return d;
+        });
 
     // Add and store a brush for each axis.
     g.append("g")

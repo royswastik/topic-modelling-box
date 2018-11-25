@@ -101,7 +101,7 @@ def getWord2VecClusters(docs):
             "word_embeddings": [],
             "topic_embeddings": {},
             "document_embeddings": [],
-            "document_word": [],
+            "document_word": {},
             "topic_word": {},
             "document_topic": {},
             "overall_centroid": []
@@ -116,9 +116,7 @@ def getWord2VecClusters(docs):
             emb = model.wv[word]
             embeddings.append(emb)
             res["word_embeddings"].append([word, labels[index], emb])
-            valDocWord = {}
-            valDocWord[word] = cosine(emb, res["overall_centroid"])
-            res["document_word"].append(valDocWord)
+            res["document_word"][word] = cosine(emb, res["overall_centroid"])
             topic = labels[index]
 
             if topic not in res["topic_word"]:

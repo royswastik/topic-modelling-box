@@ -230,3 +230,30 @@
   position: absolute;
   height: 0;
   overflow: hidden; }
+
+#parallel-coordinate-vis svg {
+  font: 10px sans-serif; }
+
+#parallel-coordinate-vis .background path {
+  fill: none;
+  stroke: #ddd;
+  shape-rendering: crispEdges; }
+
+#parallel-coordinate-vis .foreground path {
+  fill: none;
+  stroke: steelblue; }
+
+#parallel-coordinate-vis .brush .extent {
+  fill-opacity: .3;
+  stroke: #fff;
+  shape-rendering: crispEdges; }
+
+#parallel-coordinate-vis .axis line,
+#parallel-coordinate-vis .axis path {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges; }
+
+#parallel-coordinate-vis .axis text {
+  text-shadow: 0 1px 0 #fff, 1px 0 0 #fff, 0 -1px 0 #fff, -1px 0 0 #fff;
+  cursor: move; }
