@@ -1,5 +1,6 @@
 
 function loadD3(){
+
   console.log("hello");
   getAnalysis("asfas", "assad");
   loadParallelCoordinate();
@@ -30,7 +31,6 @@ function getAnalysis(text, method) {
 }
 
 function loadVisualizations() {
-
 }
 
 function initPage1(resp) {
@@ -39,7 +39,8 @@ function initPage1(resp) {
 
 
 
-function initPage2() {
+function initPage2(resp) {
+  renderClusterForceLayout(resp);
 
 }
 
