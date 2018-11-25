@@ -320,6 +320,7 @@
   }
 
 
+
   #parallel-coordinate-vis{
     svg {
       font: 10px sans-serif;
@@ -353,4 +354,23 @@
       text-shadow: 0 1px 0 #fff, 1px 0 0 #fff, 0 -1px 0 #fff, -1px 0 0 #fff;
       cursor: move;
     }
+
+
+
+  #pc-hc{
+      #pc-container {
+          max-width: 800px;
+          height: 400px;
+          margin: 1em auto;
+      }
+
+      .highcharts-series-hover path {
+        stroke: rgb(255, 66, 66);
+        stroke-width: 2px;
+      }
+    g.highcharts-axis-labels > text{
+      transform: translateX(30px) !important;
+    }
   }
+  }
+
