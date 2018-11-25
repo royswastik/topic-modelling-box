@@ -1,10 +1,19 @@
+require.config({
+    paths: {
+        "d3": "https://d3js.org/d3.v3.min"
+    }
+});
 
 function loadD3(){
 
-  console.log("hello");
-  getAnalysis("asfas", "assad");
-  loadParallelCoordinate();
-  loadParallelCoordinatesHC();
+    window.d3Old = d3;
+    require(['d3'], function(d3V3) {
+        window.d3V3 = d3V3;
+        window.d3 = d3Old;
+        getAnalysis("asfas", "assad");
+          loadParallelCoordinate();
+          loadParallelCoordinatesHC();
+    });
 }
 
 
@@ -44,6 +53,9 @@ function initPage2(resp) {
 
 }
 
-function initPage3() {
-  // loadParallelCoordinate();
+function initPage3(){
+    $("#parallel-coordinate-vis").html("");
+    $("#pc-container").html("");
+    loadParallelCoordinate();
+    loadParallelCoordinatesHC();
 }
