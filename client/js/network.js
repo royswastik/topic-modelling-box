@@ -36,7 +36,7 @@ function getWord2VecClusters(docs, successCallback){
 
 function getLDAClusters(docs, successCallback){
     var request = $.ajax({
-        url: "/api/getClustersWord2Vec",
+        url: "/api/getLDAData",
         method: "POST",
         data: JSON.stringify({docs: docs}),
         contentType: "application/json; charset=utf-8",

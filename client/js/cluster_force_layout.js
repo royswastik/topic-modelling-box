@@ -20,13 +20,18 @@ function renderClusterForceLayout(data){
 	var final_dict = {};
 	for (var key in dataVal) {
 	    if (dataVal.hasOwnProperty(key)) {
+
 	    	var childrenWords = dataVal[key];
+
 	    	for(var childKey in childrenWords){
-	    		if (childrenWords.hasOwnProperty(childKey)) {
+
+	    		if (childrenWords.hasOwnProperty(childKey) && childrenWords[childKey] > 0.1) {
+
 	    			if(!(childKey in final_dict)){
 	    				final_dict[childKey] = [];
 	    			}
-	    			final_dict[childKey].push(key);
+    				final_dict[childKey].push(key);
+	    			
 	    		}
 	    	} 
 	    }
@@ -52,6 +57,7 @@ function renderClusterForceLayout(data){
   			for(var i=0; i < array_child.length;i++){
   				var child_hash = {};
   				child_hash["order"] = i+1;
+  				child_hash["alias"] = i+1 + "";
   				child_hash["color"] = "#C7EAFB";
   				child_hash["name"]= array_child[i];
   				childs.push(child_hash);
@@ -65,14 +71,14 @@ function renderClusterForceLayout(data){
 }
 
 function renderCluster(cluster_data, d3){
-  var radius = 400;
+  var radius = 200;
   var dendogramContainer = "speciescollapsible";
   var dendogramDataSource = "forestSpecies.json";
 
-  var rootNodeSize = 20;
-  var levelOneNodeSize = 12;
-  var levelTwoNodeSize = 10;
-  var levelThreeNodeSize = 7;
+  var rootNodeSize = 6;
+  var levelOneNodeSize = 3;
+  var levelTwoNodeSize = 3;
+  var levelThreeNodeSize = 2;
 
 
   var i = 0;
