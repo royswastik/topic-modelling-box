@@ -42,7 +42,6 @@ function loadVisualizations() {
 
 function initPage1(resp) {
   renderClusterAnalysis(resp);
-  renderBarGraph(0, resp);
 }
 
 
@@ -63,6 +62,7 @@ function renderClusterAnalysis(resp) {
       y: value[1],
       c: 1,
       size: document_topic[key],
+      key: key
     });
   });
   var labelX = 'X';
@@ -152,6 +152,7 @@ function renderClusterAnalysis(resp) {
       return "#1f77b4";
     })
     .on('mouseover', function (d, i) {
+      renderBarGraph(d["key"], resp);
       fade(d.c, .1);
     })
     .on('mouseout', function (d, i) {
@@ -190,32 +191,21 @@ function renderClusterAnalysis(resp) {
 
 
 function renderBarGraph(topic_number, resp) {
-  debugger
-  var data = window.topic_word_probability; 
-  var topic_distribution_in_corpa = window.word_distribution_in_corpora;
+  d3.select("#stack-bar").remove();
   var final_data = [];
-  var data = data[topic_number][0];
-
-
-  // data =resp["topic_word"][topic_number]
-
-
-
-
-  for (var i = 0; i < data.length; i++) {
-    var temp = {};
-    var key = Object.keys(data[i])[0];
-    var val = data[i][Object.keys(data[i])[0]];
-    var overall = topic_distribution_in_corpa[key];
-    temp.State = key;
-    temp.topic_frequency = val;
-    temp.overall = overall;
-    temp.total = temp.topic_frequency + temp.overall;
-    final_data.push(temp);
+  var dataVal =resp["topic_word"][topic_number];
+  for (var key in dataVal) {
+    if (dataVal.hasOwnProperty(key)) {
+        var temp ={};
+        temp.State = key;
+        temp.topic_frequency = dataVal[key];
+        temp.overall = resp["overall_word"][key];
+        temp.total = temp.topic_frequency + temp.overall;
+        final_data.push(temp);
+        console.log(key + " -> " + dataVal[key]);
+    }
   }
-
   
-  debugger
 
   var bb = document.querySelector('#stacked-bar')
     .getBoundingClientRect(),
@@ -223,7 +213,7 @@ function renderBarGraph(topic_number, resp) {
 
   var data = final_data;
   var height = data.length * 25;
-  var svg = d3.select("#stacked-bar").append("svg").attr("width", width).attr("height", height),
+  var svg = d3.select("#stacked-bar").append("svg").attr("width", width).attr("height", height).attr("id","stack-bar"),
     margin = {
       top: 20,
       right: 20,
