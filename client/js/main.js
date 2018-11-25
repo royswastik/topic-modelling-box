@@ -9,6 +9,7 @@ function loadD3(){
                 generateTopicVectors(); //Loads vectors in window.topicVectors
                 loadVisualizations();
                 loadParallelCoordinate();
+                loadParallelCoordinatesHC();
             });
         });
     });
