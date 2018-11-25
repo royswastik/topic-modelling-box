@@ -26,7 +26,7 @@ function getWord2VecClusters(docs, successCallback){
       });
        
       request.done(function( response ) {
-        successCallback(response);
+        successCallback(JSON.parse(response));
       });
        
       request.fail(function( jqXHR, textStatus ) {

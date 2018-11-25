@@ -8,6 +8,7 @@ function loadD3(){
                 window.topic_word_probability = z;
                 generateTopicVectors(); //Loads vectors in window.topicVectors
                 loadVisualizations();
+                loadParallelCoordinate();
             });
         });
     });
