@@ -184,3 +184,10 @@ def stringify_keys(d):
             # delete old key
             del d[key]
     return d
+
+
+if __name__ == "__main__":
+    # Setting debug to True enables debug output. This line should be
+    # removed before deploying a production app.
+    app.debug = True
+    app.run(port=7000)
