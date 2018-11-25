@@ -53,5 +53,8 @@ function initPage2() {
 }
 
 function initPage3(){
+    $("#parallel-coordinate-vis").html("");
+    $("#pc-container").html("");
     loadParallelCoordinate();
+    loadParallelCoordinatesHC();
 }
