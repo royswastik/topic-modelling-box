@@ -18,9 +18,29 @@ function get2DVectors(vectors, successCallback){
 // docs format: List[List[string(word)]]
 function getWord2VecClusters(docs, successCallback){
     var request = $.ajax({
-        url: "/get2DVectors",
+        url: "/api/getClustersWord2Vec",
         method: "POST",
-        data: {docs: docs}
+        data: JSON.stringify({docs: docs}),
+        contentType: "application/json; charset=utf-8",
+        dataType   : "json"
+      });
+       
+      request.done(function( response ) {
+        successCallback(JSON.parse(response));
+      });
+       
+      request.fail(function( jqXHR, textStatus ) {
+        alert( "Request failed: " + textStatus );
+      });
+}
+
+function getLDAClusters(docs, successCallback){
+    var request = $.ajax({
+        url: "/api/getClustersWord2Vec",
+        method: "POST",
+        data: JSON.stringify({docs: docs}),
+        contentType: "application/json; charset=utf-8",
+        dataType   : "json"
       });
        
       request.done(function( response ) {
