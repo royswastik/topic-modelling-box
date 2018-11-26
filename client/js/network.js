@@ -51,4 +51,3 @@ function getLDAClusters(docs, successCallback){
         alert( "Request failed: " + textStatus );
       });
 }
-

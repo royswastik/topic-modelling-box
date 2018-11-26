@@ -25,7 +25,7 @@ function renderClusterForceLayout(data){
 
 	    	for(var childKey in childrenWords){
 
-	    		if (childrenWords.hasOwnProperty(childKey) && childrenWords[childKey] > 0.1) {
+	    		if (childrenWords.hasOwnProperty(childKey) && childrenWords[childKey] > 0.01) {
 
 	    			if(!(childKey in final_dict)){
 	    				final_dict[childKey] = [];

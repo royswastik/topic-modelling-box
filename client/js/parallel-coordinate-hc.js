@@ -1,6 +1,6 @@
 function loadParallelCoordinatesHC(resp){
 
-    getWord2VecClusters(window.documents
+    getLDAClusters(window.documents
     , function(resp) {
         let data = generateParallelCoordinateDataHC(resp, 0, 0);
         Highcharts.chart('pc-container', {

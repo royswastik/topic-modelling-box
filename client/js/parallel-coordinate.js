@@ -18,7 +18,7 @@ function loadParallelCoordinate(){
         .attr("transform", "translate(" + margin.left + "," + margin.top + ")"), dimensions;
 
 
-    getWord2VecClusters(window.documents
+    getLDAClusters(window.documents
     , function(resp) {
     // Extract the list of dimensions and create a scale for each.
     var cars = generateParallelCoordinateData(resp, 0, 0);

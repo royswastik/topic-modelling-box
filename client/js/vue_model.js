@@ -3,7 +3,7 @@ window.vueApp = new Vue({
     data: {
         message: 'Hello user!',
         noneSelected: true,
-        selectedPage: 2,
+        selectedPage: 1,
         playerDetail: {
             name: "<Player Name>"
         },

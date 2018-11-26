@@ -1,13 +1,11 @@
 from flask import Flask, request, send_from_directory
 from flask import jsonify
-from sklearn.decomposition import PCA
 import json
 
 from gensim.models import Word2Vec
 import numpy as np
 from sklearn.cluster import KMeans
 from sklearn import metrics
-import pandas as pd
 from nltk.tokenize import RegexpTokenizer
 from stop_words import get_stop_words
 from nltk.stem.porter import PorterStemmer
@@ -55,9 +53,9 @@ def getLDA_TopicClusters():
     post = request.get_json()
     print(post)
     docs = post["docs"]
-    tokenizer = RegexpTokenizer(r'\w+')
+    # tokenizer = RegexpTokenizer(r'\w+')
     en_stop = get_stop_words('en')
-    p_stemmer = PorterStemmer()
+    # p_stemmer = PorterStemmer()
     texts = []
 
     for i in docs:
@@ -129,10 +127,10 @@ def getLDA_TopicClusters():
     for i in range(0, len(word_distribution_list)):
         new_dict = word_distribution_list[i]
         for k, v in new_dict.items():
-            dict4[k] = v        
-        
+            dict4[k] = v
 
-    data = {"document_topic" : dict1, "topic_word" : dict2, "topics" : topics_list, "topic_vectors" : dict3, "word_distribution" : dict4, "words" : words}
+    words = list(set(words))
+    data = {"document_topic" : dict1, "topic_word" : dict2, "topics" : topics_list, "topic_vectors" : dict3, "overall_word" : dict4, "words" : words}
 
     try:
         data1 = json.dumps(data, default = myconverter)

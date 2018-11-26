@@ -53,7 +53,7 @@ function renderClusterAnalysis(resp) {
     }), d3.max(data, function (d) {
       return d.size;
     })])
-    .range([1, 20]);
+    .range([10, 20]);
 
   var opacity = d3.scaleSqrt()
     .domain([d3.min(data, function (d) {

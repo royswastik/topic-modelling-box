@@ -10,15 +10,41 @@ function loadD3(){
     require(['d3'], function(d3V3) {
         window.d3V3 = d3V3;
         window.d3 = d3Old;
+        // window.documents = [
+        //         //   ["i", "am", "batman", "of", "winterfall"],
+        //         //   ["there", "should", "always", "be", "a", "stark", "in", "winterfell"],
+        //         //   ["prophecy", "says", "prince", "will", "be" , "reborn"]
+        //         // ];
+        //     window.documents = [['project', 'classification', 'compare', 'neural', 'nets', 'SVM', 'due', 'due'], ['two', 'new', 'progress', 'checks', 'final', 'project',  'assigned', 'follows'], ['report', 'graded',  'contribute', 'points',  'total', 'semester', 'grade'], ['progress', 'update', 'evaluated', 'TA', 'peers'], ['class', 'meeting', 'tomorrow','teams', 'work', 'progress', 'report', 'final', 'project'], [ 'quiz',  'sections', 'regularization', 'Tuesday'], [ 'quiz', 'Thursday', 'logistics', 'work', 'online', 'student', 'postpone',  'quiz', 'Tuesday'], ['quiz', 'cover', 'Thursday'], ['quiz', 'chap', 'chap', 'linear', 'regression']];
         window.documents = [
-          ["i", "am", "batman", "of", "winterfall"],
-          ["there", "should", "always", "be", "a", "stark", "in", "winterfell"],
-          ["prophecy", "says", "prince", "will", "be" , "reborn"]
-        ];
-        getAnalysis("asfas", "assad");
-          loadParallelCoordinate();
-          loadParallelCoordinatesHC();
-    });
+            ['serious',
+                      'talk',
+                      'friends',
+                      'flaky',
+                      'lately',
+                      'understood',
+                      'good',
+                      'evening',
+                      'hanging'],
+            ['got', 'gift', 'elder', 'brother', 'really', 'surprising'],
+                     ['completed',
+                      '5',
+                      'miles',
+                      'run',
+                      'without',
+                      'break',
+                      'makes',
+                      'feel',
+                      'strong'],
+
+            ['son', 'performed', 'well', 'test',
+                'preparation']
+            ];
+
+                getAnalysis("asfas", "word2Vec");
+              loadParallelCoordinate();
+              loadParallelCoordinatesHC();
+        });
 }
 
 
@@ -29,11 +55,13 @@ function getDocs(texts) {
 function getAnalysis(method) {
   let docs = window.documents;
   let fnc = x => x;
-  if (method == "LDA") {
-    fnc = getWord2VecClusters;
-  } else {
+  if (method === "LDA") {
     fnc = getLDAClusters;
+
+  } else {
+    fnc = getWord2VecClusters;
   }
+  window.loadDFunc =  fnc;
   fnc(docs, resp => {
       window.global_data = resp;
     initPage1(resp);
