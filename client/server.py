@@ -16,6 +16,7 @@ from sklearn.decomposition import PCA
 from collections import Counter
 import operator
 app = Flask(__name__)
+en_stop = get_stop_words('en')
 
 @app.route('/')
 def index():
@@ -93,7 +94,7 @@ def getLDA_TopicClusters():
         docs = post["docs"]
     
     # tokenizer = RegexpTokenizer(r'\w+')
-    en_stop = get_stop_words('en')
+
     # p_stemmer = PorterStemmer()
     texts = []
 
@@ -223,6 +224,7 @@ def getWord2VecClusters(docs):
         return labels, centroids
 
     def make_word2vec_clusters(documents):
+        documents = removeStopWords(documents)
         word_set = set()
         for document in documents:
             word_set |= set(document)
@@ -319,6 +321,13 @@ def stringify_keys(d):
             # delete old key
             del d[key]
     return d
+
+def removeStopWords(documents):
+    newDocuments = []
+    for doc in documents:
+        newDoc = [i for i in doc if not i in en_stop]
+        newDocuments.append(newDoc)
+    return newDocuments
 
 def myconverter(o):
     if isinstance(o, np.float32):
