@@ -78,8 +78,49 @@
 
                             </div>
                         </div>
-                        <div id="page5">
-                            <</div>
+                        <div id="page5" v-bind:class="{ 'hidden': selectedPage != 5 }">
+                            <h3>Dashboard</h3>
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <div class="card note-card">
+                                         <div class="card-body">
+                                             <div class="form-group">
+                                                <label for="exampleFormControlSelect0">Text Clustering Algorithm</label>
+                                                <select class="form-control" id="exampleFormControlSelect0">
+                                                  <option>Latent Dirichlet Allocation</option>
+                                                  <option>KMeans on top of word vectors</option>
+                                                </select>
+                                              </div>
+                                             <div class="form-group">
+                                                <label for="exampleFormControlSelect1">Dataset</label>
+                                                <select class="form-control" id="exampleFormControlSelect1">
+                                                  <option>HappyDB</option>
+                                                  <option>Medium Articles</option>
+                                                </select>
+                                              </div>
+                                             Or,
+                                             <div class="form-group">
+                                                <label for="exampleFormControlTextarea1">Enter text here.</label>
+                                                <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                                              </div>
+
+
+                                                <div class="form-group">
+                                                    <button class="btn btn-info">Save Changes</button>
+                                                </div>
+
+
+                                              </div>
+
+
+
+
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+
+                                </div>
+                            </div>
                         </div>
                     </div>
             

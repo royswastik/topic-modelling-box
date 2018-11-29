@@ -41,7 +41,7 @@ function loadD3(){
                 'preparation']
             ];
 
-                getAnalysis("LDA");
+                getAnalysis("word2Vec");
         });
 }
 
