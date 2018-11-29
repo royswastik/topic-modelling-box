@@ -1,6 +1,7 @@
 from flask import Flask, request, send_from_directory
 from flask import jsonify
 import json
+import pandas as pd
 
 from gensim.models import Word2Vec
 import numpy as np
@@ -44,7 +45,26 @@ def get2DVectors():
 def getWord2Vec_TopicClusters():
     post = request.get_json()
     print(post)
-    docs = post["docs"]
+    start_page = post["start"]
+    end_page = post["end"]
+    db_selected = post["selected"]
+    if db_selected == 0:
+        df = pd.read_csv("cleaned_hm.csv")
+        dfRange = df.iloc[start_page:end_page]
+        cleaned_text = dfRange["cleaned_hm"].tolist()
+        docs = []
+        for l in cleaned_text:
+            docs.append(l.split())
+    elif db_selected==1:
+        df = pd.read_csv("articles.csv")
+        dfRange = df.iloc[start_page:end_page]
+        text = dfRange["text"].tolist()
+        docs = []
+        for l in text:
+            docs.append(l.split())
+    else:
+        docs = post["docs"]
+    print(docs)
     res = getWord2VecClusters(docs)
     return jsonify(res)
 
@@ -52,7 +72,26 @@ def getWord2Vec_TopicClusters():
 def getLDA_TopicClusters():
     post = request.get_json()
     print(post)
-    docs = post["docs"]
+    start_page = post["start"]
+    end_page = post["end"]
+    db_selected = post["selected"]
+    if db_selected == 0:
+        df = pd.read_csv("cleaned_hm.csv")
+        dfRange = df.iloc[start_page:end_page]
+        cleaned_text = dfRange["cleaned_hm"].tolist()
+        docs = []
+        for l in cleaned_text:
+            docs.append(l.split())
+    elif db_selected==1:
+        df = pd.read_csv("articles.csv")
+        dfRange = df.iloc[start_page:end_page]
+        text = dfRange["text"].tolist()
+        docs = []
+        for l in text:
+            docs.append(l.split())
+    else:
+        docs = post["docs"]
+    
     # tokenizer = RegexpTokenizer(r'\w+')
     en_stop = get_stop_words('en')
     # p_stemmer = PorterStemmer()
@@ -165,7 +204,7 @@ def getWord2VecClusters(docs):
         best_silhoutte = -100
         labels = []
         print(len(texts) // 2)
-        for k in range(2, max(len(texts) // 2, 2)):
+        for k in range(2, 10):
             kmeans_model_tmp = KMeans(n_clusters=k, random_state=1).fit(embeddings)
             silhoutte = metrics.silhouette_score(embeddings, kmeans_model_tmp.labels_, metric='cosine')
             print("Silhoutte for k=" + str(k) + " is " + str(silhoutte))
