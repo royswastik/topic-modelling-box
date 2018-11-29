@@ -1,4 +1,4 @@
-function loadParallelCoordinate(){
+function loadParallelCoordinate(resp){
     var margin = {top: 30, right: 10, bottom: 10, left: 10},
         width = 960 - margin.left - margin.right,
         height = 500 - margin.top - margin.bottom;
@@ -18,8 +18,6 @@ function loadParallelCoordinate(){
         .attr("transform", "translate(" + margin.left + "," + margin.top + ")"), dimensions;
 
 
-    getLDAClusters(window.documents
-    , function(resp) {
     // Extract the list of dimensions and create a scale for each.
     var cars = generateParallelCoordinateData(resp, 0, 0);
     // var axisD = d3V3.svg.axis().orient("left").ticks(Object.keys(resp["document_topic"]).length),
@@ -112,7 +110,7 @@ function loadParallelCoordinate(){
         .selectAll("rect")
         .attr("x", -8)
         .attr("width", 16);
-    });
+
 
     function position(d) {
     var v = dragging[d];

@@ -41,12 +41,9 @@ function loadD3(){
                 'preparation']
             ];
 
-                getAnalysis("asfas", "word2Vec");
-              loadParallelCoordinate();
-              loadParallelCoordinatesHC();
+                getAnalysis("LDA");
         });
 }
-
 
 function getDocs(texts) {
   return window.documents = texts.map(x => x.split());
@@ -85,11 +82,11 @@ function initPage2(resp) {
 
 }
 
-function initPage3(){
+function initPage3(resp){
     $("#parallel-coordinate-vis").html("");
     $("#pc-container").html("");
-    loadParallelCoordinate();
-    loadParallelCoordinatesHC();
+    loadParallelCoordinate(resp);
+    loadParallelCoordinatesHC(resp);
 }
 
 function initPage4(){

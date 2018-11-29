@@ -1,7 +1,6 @@
 function loadParallelCoordinatesHC(resp){
 
-    getLDAClusters(window.documents
-    , function(resp) {
+
         let data = generateParallelCoordinateDataHC(resp, 0, 0);
         Highcharts.chart('pc-container', {
             chart: {
@@ -67,8 +66,6 @@ function loadParallelCoordinatesHC(resp){
                 };
             })
         });
-    });
-
 
 }
 

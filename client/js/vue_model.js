@@ -20,10 +20,10 @@ window.vueApp = new Vue({
                 initPage2(window.global_data);
             }
             if (x == 3){
-                initPage3();
+                initPage3(window.global_data);
             }
             if (x == 4){
-                initPage4();
+                initPage4(window.global_data);
             }
         }
     },
