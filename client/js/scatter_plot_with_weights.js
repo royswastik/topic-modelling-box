@@ -125,12 +125,16 @@ function renderClusterAnalysis(resp) {
       return y(d.y);
     });
 
-    svg.append("text")
+
+      // text label for the x axis
+  svg.append("text")
     .attr("class", "x label")
     .attr("text-anchor", "end")
     .attr("x", width)
     .attr("y", height +40)
     .text("PC1");
+    .text("PCA1");
+
 
   svg.append("text")
     .attr("class", "y label")
@@ -139,7 +143,6 @@ function renderClusterAnalysis(resp) {
     .attr("dy", ".75em")
     .attr("transform", "rotate(-90)")
     .text("PC2");
-
 
 
   function fade(c, opacity) {

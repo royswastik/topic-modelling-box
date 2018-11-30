@@ -41,7 +41,7 @@ function loadD3(){
                 'preparation']
             ];
 
-                getAnalysis("word2Vec");
+                getAnalysis("word2vec");
         });
 }
 
