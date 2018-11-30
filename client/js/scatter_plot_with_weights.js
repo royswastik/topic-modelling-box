@@ -108,7 +108,7 @@ function renderClusterAnalysis(resp) {
     })
     .on('mouseover', function (d, i) {
       renderBarGraph(d["key"], resp);
-      fade(d.c, .1);
+      fade(d.c, .7);
     })
     .on('mouseout', function (d, i) {
       fadeOut();
