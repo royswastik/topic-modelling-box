@@ -4,7 +4,7 @@ function renderClusterAnalysis(resp) {
   var topic_vectors = resp["topic_vectors"];
   var bb = document.querySelector('#cluster')
     .getBoundingClientRect(),
-    width = 600;
+    width = 400;
   var height = 400;
   var margin = 80;
   var data = [];

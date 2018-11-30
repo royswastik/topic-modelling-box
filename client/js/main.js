@@ -53,10 +53,10 @@ function getAnalysis(method) {
   let docs = window.documents;
   let fnc = x => x;
   if (method === "LDA") {
-    fnc = getLDAClusters;
+    fnc = getWord2VecClusters;
 
   } else {
-    fnc = getLDAClusters;
+    fnc = getWord2VecClusters;
   }
   window.loadDFunc =  fnc;
   fnc(docs, resp => {

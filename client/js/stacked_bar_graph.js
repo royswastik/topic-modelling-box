@@ -16,18 +16,17 @@ function renderBarGraph(topic_number, resp) {
     
   }
   
-
   var bb = document.querySelector('#stacked-bar')
     .getBoundingClientRect(),
-    width = 600;
+    width = 400;
 
   var data = final_data;
-  var height = data.length * 25;
+  var height = data.length * 25 +100;
   var svg = d3.select("#stacked-bar").append("svg").attr("width", width).attr("height", height).attr("id","stack-bar"),
     margin = {
       top: 20,
-      right: 20,
-      bottom: 30,
+      right: 0,
+      bottom: 50,
       left: 80
     },
     width = +svg.attr("width") - margin.left - margin.right,
@@ -40,7 +39,7 @@ function renderBarGraph(topic_number, resp) {
     .rangeRound([0, width]); // .rangeRound([height, 0]);
 
   var z = d3.scaleOrdinal().range(["#C8423E", "#A1C7E0"]);
-  var keys = ["topic_frequency", "overall_frequency"];
+  var keys = ["topic_frequency", "overall"];
   data.sort(function (a, b) {
     return b.total - a.total;
   });
@@ -53,39 +52,67 @@ function renderBarGraph(topic_number, resp) {
   })]).nice(); // y.domain...
 
   z.domain(keys);
-  g.append("g").selectAll("g").data(d3.stack().keys(keys)(data)).enter().append("g").attr("fill", function (d) {
-      return z(d.key);
-    }).selectAll("rect").data(function (d) {
-      return d;
-    }).enter().append("rect").attr("y", function (d) {
-      return y(d.data.State);
-    }) //.attr("x", function(d) { return x(d.data.State); })
-    .attr("x", function (d) {
-      return x(d[0]);
-    }) //.attr("y", function(d) { return y(d[1]); })  
-    .attr("width", function (d) {
-      return x(d[1]) - x(d[0]);
+  g.append("g")
+    .selectAll("g")
+    .data(d3.stack().keys(keys)(data))
+    .enter().append("g")
+      .attr("fill", function(d) { return z(d.key); })
+    .selectAll("rect")
+    .data(function(d) { return d; })
+    .enter().append("rect")
+      .attr("y", function(d) { return y(d.data.State); })     //.attr("x", function(d) { return x(d.data.State); })
+      .attr("x", function(d) { return x(d[0]); })         //.attr("y", function(d) { return y(d[1]); }) 
+      .attr("width", function(d) {
+        if(d[0] == 0 && isNaN(d[1])){
+          console.log(d[0]);
+          d[1] = d.data.topic_frequency;
+        }
+        if(isNaN(d[1])){
+          d[1] = d.data.total;
+        }
+       return x(d[1]) - x(d[0]); 
     }) //.attr("height", function(d) { return y(d[0]) - y(d[1]); })
-    .attr("height", y.bandwidth())
-    .attr("opacity", 0.8); //.attr("width", x.bandwidth()); 
+      .attr("height", y.bandwidth());               //.attr("width", x.bandwidth());  
 
-  g.append("g").attr("class", "axis").attr("transform", "translate(0,0)") //  .attr("transform", "translate(0," + height + ")")
-    .call(d3.axisLeft(y)); //   .call(d3.axisBottom(x));
+  g.append("g")
+      .attr("class", "axis")
+      .attr("transform", "translate(0,0)")            //  .attr("transform", "translate(0," + height + ")")
+      .call(d3.axisLeft(y));                  //   .call(d3.axisBottom(x));
 
-  g.append("g").attr("class", "axis").attr("transform", "translate(0," + height + ")") // New line
-    .call(d3.axisBottom(x).ticks(null, "s")) //  .call(d3.axisLeft(y).ticks(null, "s"))
-    .append("text").attr("y", 2) //     .attr("y", 2)
-    .attr("x", x(x.ticks().pop()) + 0.5) //     .attr("y", y(y.ticks().pop()) + 0.5)
-    .attr("dy", "0.32em") //     .attr("dy", "0.32em")
+  g.append("g")
+      .attr("class", "axis")
+    .attr("transform", "translate(0,"+height+")")       // New line
+      .call(d3.axisBottom(x).ticks(null, "s"))          //  .call(d3.axisLeft(y).ticks(null, "s"))
+    .append("text")
+      .attr("y", 2)                       //     .attr("y", 2)
+      .attr("x", x(x.ticks().pop()) + 0.5)            //     .attr("y", y(y.ticks().pop()) + 0.5)
+      .attr("dy", "4em")                   //     .attr("dy", "0.32em")
+      .attr("fill", "#000")
+      .attr("text-anchor", "start")
+      .text("Probability")
+    .attr("transform", "translate("+ (-width) +",-10)");    // Newline
+
+  var legend = g.append("g")
+      .attr("font-family", "sans-serif")
+      .attr("font-size", 10)
+      .attr("text-anchor", "end")
+    .selectAll("g")
+    .data(keys.slice().reverse())
+    .enter().append("g")
+    //.attr("transform", function(d, i) { return "translate(0," + i * 20 + ")"; });
+   .attr("transform", function(d, i) { return "translate(-50," + (300 + i * 20) + ")"; });
   
 
+  var x= 100;
+  var keys1 = ["Topic Frequency", "Overall Frequency"]; 
   var svg1 = d3.select("#legendT").append("svg").attr("width", width).attr("height", height).attr("id","legendsvg")
-var legend = svg1.append("g").attr("font-family", "sans-serif").attr("font-size", 10).attr("text-anchor", "end").selectAll("g").data(keys.slice().reverse()).enter().append("g") //.attr("transform", function(d, i) { return "translate(0," + i * 20 + ")"; });
+var legend = svg1.append("g").attr("font-family", "sans-serif").attr("font-size", 10).attr("text-anchor", "end").selectAll("g").data(keys1.slice().reverse()).enter().append("g") //.attr("transform", function(d, i) { return "translate(0," + i * 20 + ")"; });
     .attr("transform", function (d, i) {
       return "translate(-50," + (0 + i * 20) + ")";
     });
-  legend.append("rect").attr("x", width - 25).attr("width", 60).attr("height", 19).attr("fill", z);
+  legend.append("rect").attr("x", width - 25).attr("width", 60 + x).attr("height", 19).attr("fill", z);
   legend.append("text").attr("x", width - 24).attr("y", 18).attr("dy", "0.0em").text(function (d) {
     return d;
   });
+  x =0;
 }
