@@ -14,15 +14,23 @@
   integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
   crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.js"></script>
+          <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+
       <style>
           .hidden{
               display: none !important;
+          }
+          .doc-card{
+              font-size: 9pt;
           }
       </style>
   </head>
   <body>
     <div id="vue-app">
             <div class="ui sidebar inverted vertical menu">
+                    <a class="item" v-on:click="selectPage(5)">
+                        Dashboard/Settings
+                    </a>
                     <a class="item" v-on:click="selectPage(1)">
                         Topic Word Relationship
                     </a>
@@ -39,8 +47,8 @@
                 <div class="pusher">
                     <div id="container-fluid" style=" margin-bottom: 50px;">
                             <nav id="navbar-example2" class="navbar navbar-dark bg-dark bg-light">
-                            <a class="navbar-brand" href="#">Final Project</a>
-                            <a id="toggle-sidebar" style="cursor:pointer; color:white;">Toggle Menu</a>
+                            <a  id="toggle-sidebar" class="navbar-brand" href="#"><i class="fas fa-bars"></i> &nbsp; Final Project</a>
+                            <!--<a style="cursor:pointer; color:white;">Toggle Menu</a>-->
                             </nav>
                     </div>
                 <!-- Site content !-->
@@ -54,6 +62,7 @@
                               <div id="stacked-bar">
                               </div>
                               <div id="legendT">
+
                               </div>
                             </div>
                             
@@ -98,20 +107,21 @@
                                               </div>
                                              <div class="form-group">
                                                 <label for="exampleFormControlSelect1">Dataset</label>
-                                                <select class="form-control" id="exampleFormControlSelect1">
-                                                  <option>HappyDB</option>
-                                                  <option>Medium Articles</option>
+                                                <select v-model="settings.selectedDataset" class="form-control" id="exampleFormControlSelect1">
+                                                  <option value="0">HappyDB</option>
+                                                  <option value="1">Medium Articles</option>
+                                                    <option value="2">Custom</option>
                                                 </select>
                                               </div>
-                                             Or,
-                                             <div class="form-group">
+                                             <div class="form-group" v-if="settings.selectedDataset == '2'">
                                                 <label for="exampleFormControlTextarea1">Enter text here.</label>
                                                 <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
-                                              </div>
+                                                 <button>Add Doc</button>
+                                             </div>
 
 
                                                 <div class="form-group">
-                                                    <button class="btn btn-info">Save Changes</button>
+                                                    <button class="btn btn-info btn-block">Save Changes</button>
                                                 </div>
 
 
@@ -123,7 +133,16 @@
                                     </div>
                                 </div>
                                 <div class="col-sm-6">
+                                    <div id="new-documents">
+                                        <div class="card-columns">
+                                            <div v-for="doc in newDocs" class="card doc-card">
+                                                <div class="card-body">
+                                                    {{doc}}
+                                                </div>
+                                            </div>
 
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
