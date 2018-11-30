@@ -20,7 +20,7 @@ function getWord2VecClusters(docs, successCallback){
     var request = $.ajax({
         url: "/api/getClustersWord2Vec",
         method: "POST",
-        data: JSON.stringify({docs: docs}),
+        data: JSON.stringify({docs: docs, start: 1, end: 5, selected: 0}),
         contentType: "application/json; charset=utf-8",
         dataType   : "json"
       });
@@ -38,7 +38,7 @@ function getLDAClusters(docs, successCallback){
     var request = $.ajax({
         url: "/api/getLDAData",
         method: "POST",
-        data: JSON.stringify({docs: docs}),
+        data: JSON.stringify({docs: docs, start: 1, end: 5, selected: 0}),
         contentType: "application/json; charset=utf-8",
         dataType   : "json"
       });

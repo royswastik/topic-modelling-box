@@ -41,7 +41,7 @@ function loadD3(){
                 'preparation']
             ];
 
-                getAnalysis("word2Vec");
+                getAnalysis("LDA");
         });
 }
 
@@ -56,7 +56,7 @@ function getAnalysis(method) {
     fnc = getLDAClusters;
 
   } else {
-    fnc = getLDAClusters;
+    fnc = getWord2VecClusters;
   }
   window.loadDFunc =  fnc;
   fnc(docs, resp => {
