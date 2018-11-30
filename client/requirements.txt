@@ -5,3 +5,4 @@ gensim
 pandas
 nltk
 stop_words
+pandas

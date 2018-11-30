@@ -8,7 +8,12 @@ window.vueApp = new Vue({
             name: "<Player Name>"
         },
         overviewFilters: {},
-        selectedMap: 1
+        selectedMap: 1,
+        settings: {
+            selectedMethod: 1,
+            start: 1,
+            end: 1
+        }
     },
     methods: {
         selectPage: function(x){
