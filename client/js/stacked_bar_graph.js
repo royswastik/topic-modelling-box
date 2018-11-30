@@ -63,13 +63,7 @@ function renderBarGraph(topic_number, resp) {
       .attr("y", function(d) { return y(d.data.State); })     //.attr("x", function(d) { return x(d.data.State); })
       .attr("x", function(d) { return x(d[0]); })         //.attr("y", function(d) { return y(d[1]); }) 
       .attr("width", function(d) {
-        if(d[0] == 0 && isNaN(d[1])){
-          console.log(d[0]);
-          d[1] = d.data.topic_frequency;
-        }
-        if(isNaN(d[1])){
-          d[1] = d.data.total;
-        }
+        
        return x(d[1]) - x(d[0]); 
     }) //.attr("height", function(d) { return y(d[0]) - y(d[1]); })
       .attr("height", y.bandwidth());               //.attr("width", x.bandwidth());  
@@ -104,7 +98,7 @@ function renderBarGraph(topic_number, resp) {
   
 
   var x= 100;
-  var keys1 = ["Topic Frequency", "Overall Frequency"]; 
+  var keys1 = ["Topic Frequency    ", "Overall Frequency"]; 
   var svg1 = d3.select("#legendT").append("svg").attr("width", width).attr("height", height).attr("id","legendsvg")
 var legend = svg1.append("g").attr("font-family", "sans-serif").attr("font-size", 10).attr("text-anchor", "end").selectAll("g").data(keys1.slice().reverse()).enter().append("g") //.attr("transform", function(d, i) { return "translate(0," + i * 20 + ")"; });
     .attr("transform", function (d, i) {
