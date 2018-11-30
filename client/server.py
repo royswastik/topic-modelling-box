@@ -14,9 +14,12 @@ from gensim import corpora, models
 import gensim
 from sklearn.decomposition import PCA
 from collections import Counter
+from nltk.stem.wordnet import WordNetLemmatizer
 import operator
 app = Flask(__name__)
 en_stop = get_stop_words('en')
+tokenizer = RegexpTokenizer(r'\w+')
+lmtzr = WordNetLemmatizer()
 
 @app.route('/')
 def index():
@@ -101,7 +104,7 @@ def getLDA_TopicClusters():
     for i in docs:
 
         tokens = i
-        stopped_tokens = [i for i in tokens if not i in en_stop]
+        stopped_tokens = [i for i in tokens if not i.lower() in en_stop]
         texts.append(stopped_tokens)
 
     dictionary = corpora.Dictionary(texts)
@@ -323,10 +326,23 @@ def stringify_keys(d):
             del d[key]
     return d
 
+# Each documents contains sentence
+@app.route("/getDocsFromTexts", methods=['POST'])
+def getDocumentsFromTexts():
+    post = request.get_json()
+    docs = post['docs']
+    newDocs = []
+    for doc in docs:
+        tokens = tokenizer.tokenize(doc)
+        newDocs.append(tokens)
+
+    newDocs = removeStopWords(newDocs)
+    return json.dumps({'docs': newDocs})
+
 def removeStopWords(documents):
     newDocuments = []
     for doc in documents:
-        newDoc = [i for i in doc if not i in en_stop]
+        newDoc = [lmtzr.lemmatize(i) for i in doc if not i.lower() in en_stop]
         newDocuments.append(newDoc)
     return newDocuments
 

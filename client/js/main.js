@@ -49,7 +49,7 @@ function getDocs(texts) {
   return window.documents = texts.map(x => x.split());
 }
 
-function getAnalysis(method) {
+function getAnalysis(method, success) {
   let docs = window.documents;
   let fnc = x => x;
   if (method === "LDA") {
@@ -65,6 +65,9 @@ function getAnalysis(method) {
     initPage2(resp);
     initPage3(resp);
     initPage4();
+    if(success){
+        success(resp);
+    }
   });
 }
 

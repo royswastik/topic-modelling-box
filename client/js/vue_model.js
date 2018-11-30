@@ -3,16 +3,25 @@ window.vueApp = new Vue({
     data: {
         message: 'Hello user!',
         noneSelected: true,
-        selectedPage: 4,
+        selectedPage: 5,
         playerDetail: {
             name: "<Player Name>"
         },
         overviewFilters: {},
+        newDocs: [],
         selectedMap: 1,
+        success: false,
+        loading: false,
+        newDoc: '',
+        newDocsProccessed: '',
+        showProcessed: false,
         settings: {
-            selectedMethod: 1,
-            start: 1,
-            end: 1,
+            selectedMethod: 'word2Vec',
+            selectedDataset: 0,
+            start1: 0,      //HappyDB
+            end1: 10,        //HappyDB
+            start2: 0,      //Medium
+            end2: 5,        //Medium
             ldaTopicThreshold: 0,
             word2VecThreshold: 0
         }
@@ -32,6 +41,56 @@ window.vueApp = new Vue({
             if (x == 4){
                 initPage4(window.global_data);
             }
+        },
+        addNewDoc: function(){
+            if (this.newDoc.trim().split(" ").length < 3){
+                alert("Please add at least 3 words");
+                return;
+            }
+            this.newDocs.push(this.newDoc);
+            this.newDoc = '';
+            this.showProcessed = false;
+        },
+        processDocs: function () {
+            var self = this;
+            getTokenizedDocs(this.newDocs, function(resp){
+                self.newDocsProccessed = resp;
+                self.showProcessed = true;
+            });
+        },
+        saveChanges: function(){
+            var self = this;
+            self.success = false;
+            self.loading = true;
+            if (this.settings.selectedDataset == 0){
+                if(this.settings.end1 - this.settings.start1 < 10){
+                    alert("There needs to be atleast 5 documents(& <= 50) for Happy DB. And start index can not be greater than end.");
+                    return;
+                } else if(this.settings.end1 - this.settings.start1 > 50){
+                    alert("There needs to be less than 50 documents for HappyDB.");
+                    return;
+                }
+            } else if (this.settings.selectedDataset == 1){
+                if(this.settings.end2 - this.settings.start2 < 5){
+                    alert("There needs to be atleast 5 documents(& <= 30) for Medium Articles. And start index can not be greater than end.");
+                    return;
+                } else if(this.settings.end2 - this.settings.start2 > 30){
+                    alert("There needs to be less than 30 documents for Medium Articles.");
+                    return;
+                }
+            } else if (this.settings.selectedDataset == 2){
+                    if (!this.showProcessed){
+                        alert("Please process all documents first");
+                        return;
+                    }
+                    window.documents = this.newDocsProccessed;
+            }
+
+
+            getAnalysis(this.settings.selectedMethod, function(resp){
+                self.success = true;
+                self.loading = false;
+            });
         }
     },
     mounted: function(){

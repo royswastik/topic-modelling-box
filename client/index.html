@@ -93,34 +93,69 @@
                         </div>
                         <div id="page5" v-bind:class="{ 'hidden': selectedPage != 5 }">
                             <h3>Dashboard</h3>
+                            <div v-if="loading" class="lds-ellipsis"><div></div><div></div><div></div><div></div></div>
+                            <div class="row" v-if="success">
+                                <div class="col-sm-12">
+                                    <div class="alert alert-success" role="alert">
+                                      <h4 class="alert-heading">All Documents Analyzed. </h4>
+                                      <p>You may open the new outputs from the sidemenu option. Click top left icon on this page to open side menu..</p>
+                                      <hr>
+
+                                    </div>
+                                </div>
+                            </div>
                             <div class="row">
                                 <div class="col-sm-6">
                                     <div class="card note-card">
                                          <div class="card-body">
                                              <div class="form-group">
                                                 <label for="exampleFormControlSelect0">Text Clustering Algorithm</label>
-                                                <select class="form-control" id="exampleFormControlSelect0">
-                                                  <option>Latent Dirichlet Allocation</option>
-                                                  <option>KMeans on top of word vectors</option>
+                                                <select  v-model="settings.selectedMethod" class="form-control" id="exampleFormControlSelect0">
+                                                  <option value="LDA">Latent Dirichlet Allocation</option>
+                                                  <option value="word2Vec">KMeans on top of word vectors</option>
                                                 </select>
                                               </div>
                                              <div class="form-group">
-                                                <label for="exampleFormControlSelect1">Dataset</label>
+                                                <label>Dataset</label>
                                                 <select v-model="settings.selectedDataset" class="form-control" id="exampleFormControlSelect1">
                                                   <option value="0">HappyDB</option>
                                                   <option value="1">Medium Articles</option>
                                                     <option value="2">Custom</option>
                                                 </select>
                                               </div>
-                                             <div class="form-group" v-if="settings.selectedDataset == '2'">
+                                             <div v-bind:class="{ 'hidden': settings.selectedDataset != '0' }">
+                                                 <div class="form-group">
+                                                    <label>Start Document Index</label>
+                                                    <input v-model="settings.start1" type="number" class="form-control" max="108337" min="0"  step="1" placeholder="0">
+                                                    <small class="form-text text-muted">Document Index starts from 0</small>
+                                                  </div>
+                                                 <div class="form-group">
+                                                    <label>End Document Index</label>
+                                                    <input v-model="settings.end1" type="number" class="form-control" max="108337"  step="1" min="5" placeholder="5">
+                                                    <small class="form-text text-muted">Document Index ends at 1650. Total 1650 Medium Articles.</small>
+                                                  </div>
+                                             </div>
+                                             <div v-bind:class="{ 'hidden': settings.selectedDataset != '1' }">
+                                                 <div class="form-group">
+                                                    <label>Start Document Index</label>
+                                                    <input v-model="settings.start2" type="number" class="form-control" max="1650" min="0"  step="1" placeholder="0">
+                                                    <small class="form-text text-muted">Document Index starts from 0</small>
+                                                  </div>
+                                                 <div class="form-group">
+                                                    <label>End Document Index</label>
+                                                    <input v-model="settings.end2" type="number" class="form-control" max="1650" min="5"  step="1" placeholder="5">
+                                                    <small class="form-text text-muted">Document Index ends at 1650. Total 1650 Medium Articles.</small>
+                                                  </div>
+                                             </div>
+                                             <div class="form-group" v-bind:class="{ 'hidden': settings.selectedDataset != '2' }">
                                                 <label for="exampleFormControlTextarea1">Enter text here.</label>
-                                                <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
-                                                 <button>Add Doc</button>
+                                                <textarea v-model="newDoc" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                                                 <button v-on:click="addNewDoc">Add Doc</button>
                                              </div>
 
 
                                                 <div class="form-group">
-                                                    <button class="btn btn-info btn-block">Save Changes</button>
+                                                    <button v-on:click="saveChanges" class="btn btn-info btn-block">Analyze Documents</button>
                                                 </div>
 
 
@@ -132,15 +167,31 @@
                                     </div>
                                 </div>
                                 <div class="col-sm-6">
-                                    <div id="new-documents">
-                                        <div class="card-columns">
-                                            <div v-for="doc in newDocs" class="card doc-card">
-                                                <div class="card-body">
-                                                    {{doc}}
+                                    <div id="new-documents" v-bind:class="{ 'hidden': (settings.selectedDataset != '2') }">
+                                        <div  v-bind:class="{ 'hidden': (showProcessed || newDocs == 0) }">
+                                            <h4>Unprocessed Documents</h4>
+                                            <button class="btn btn-success btn-block" v-on:click="processDocs">Process Documents</button>
+                                            <div class="card-columns">
+                                                <div v-for="doc in newDocs" class="card doc-card">
+                                                    <div class="card-body">
+                                                        {{doc}}
+                                                    </div>
                                                 </div>
-                                            </div>
 
+                                            </div>
                                         </div>
+                                        <div v-bind:class="{ 'hidden': !showProcessed }">
+                                            <h4>Documents Processing Complete</h4>
+                                            <div class="card-columns">
+                                                <div v-for="doc in newDocsProccessed" class="card doc-card">
+                                                    <div class="card-body">
+                                                        {{doc}}
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+
                                     </div>
                                 </div>
                             </div>
