@@ -133,7 +133,6 @@ function renderClusterAnalysis(resp) {
     .attr("x", width)
     .attr("y", height +40)
     .text("PC1");
-    .text("PCA1");
 
 
   svg.append("text")
