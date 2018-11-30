@@ -256,16 +256,17 @@ def getWord2VecClusters(docs):
             res["document_word"][word] = cosine(emb, res["overall_centroid"])
             topic = labels[index]
 
-            if topic not in res["topic_word"]:
-                res["topic_word"][topic] = {}
-            res["topic_word"][topic][word] = cosine(res["topic_embeddings"][topic], emb)
+            if str(topic) not in res["topic_word"]:
+                res["topic_word"][str(topic)] = {}
+            res["topic_word"][str(topic)][word] = cosine(res["topic_embeddings"][topic], emb)
 
         for index, topic in enumerate(res["topic_word"].keys()):
+            topic = int(topic)
             emb = res["topic_embeddings"][topic]
             for doc_index, doc_emb in enumerate(res["document_embeddings"]):
-                if doc_index not in res["document_topic"]:
-                    res["document_topic"][doc_index] = {}
-                res["document_topic"][doc_index][topic] = cosine(res["topic_embeddings"][topic], doc_emb)
+                if str(doc_index) not in res["document_topic"]:
+                    res["document_topic"][str(doc_index)] = {}
+                res["document_topic"][str(doc_index)][str(topic)] = cosine(res["topic_embeddings"][topic], doc_emb)
         return res
     res = make_word2vec_clusters(docs)
     words_set = set()
@@ -333,8 +334,24 @@ def myconverter(o):
     if isinstance(o, np.float32):
         return float(o)
 
+def key_to_json(data):
+    if data is None or isinstance(data, (bool, int, str)):
+        return data
+    if isinstance(data, (tuple, frozenset)):
+        return str(data)
+    raise TypeError
+
+def to_json(data):
+    if data is None or isinstance(data, (bool, int, tuple, range, str, list)):
+        return data
+    if isinstance(data, (set, frozenset)):
+        return sorted(data)
+    if isinstance(data, dict):
+        return {key_to_json(key): to_json(data[key]) for key in data}
+    raise TypeError
+
 if __name__ == "__main__":
     # Setting debug to True enables debug output. This line should be
     # removed before deploying a production app.
     app.debug = True
-    app.run(port=7000)
+    app.run(port=5000)

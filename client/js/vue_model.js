@@ -12,7 +12,9 @@ window.vueApp = new Vue({
         settings: {
             selectedMethod: 1,
             start: 1,
-            end: 1
+            end: 1,
+            ldaTopicThreshold: 0,
+            word2VecThreshold: 0
         }
     },
     methods: {
