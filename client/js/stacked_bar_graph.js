@@ -83,7 +83,7 @@ function renderBarGraph(topic_number, resp) {
       .attr("dy", "4em")                   //     .attr("dy", "0.32em")
       .attr("fill", "#000")
       .attr("text-anchor", "start")
-      .text("Probability")
+      .text("Probability/Cosine Similarity")
     .attr("transform", "translate("+ (-width) +",-10)");    // Newline
 
   var legend = g.append("g")
