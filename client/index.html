@@ -13,15 +13,28 @@
   src="https://code.jquery.com/jquery-3.1.1.min.js"
   integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
   crossorigin="anonymous"></script>
+      <link href="https://fonts.googleapis.com/css?family=Pacifico" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.js"></script>
           <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
-
+<link href="https://fonts.googleapis.com/css?family=Noto+Sans+TC" rel="stylesheet">
       <style>
           .hidden{
               display: none !important;
           }
           .doc-card{
               font-size: 9pt;
+          }
+          .ldaVisLogo{
+              font-family: 'Noto Sans TC', sans-serif;
+          }
+          .logo-bottom{
+                width: 150px;
+                height: 4px;
+                margin-top: -7px;
+                background: #ce1e1e;
+                text-align: center;
+                margin-left: auto;
+                margin-right: auto;
           }
       </style>
   </head>
@@ -92,13 +105,30 @@
                             </div>
                         </div>
                         <div id="page5" v-bind:class="{ 'hidden': selectedPage != 5 }">
-                            <h3>Dashboard</h3>
+                            <h1 class="ldaVisLogo text-center">
+                                LDAVis Duplex
+                            </h1>
+                            <div class="logo-bottom"></div>
+                            <h3>Settings</h3>
+                            <small>Choose algorithm and dataset</small>
                             <div v-if="loading" class="lds-ellipsis"><div></div><div></div><div></div><div></div></div>
+
+
                             <div class="row" v-if="success">
                                 <div class="col-sm-12">
                                     <div class="alert alert-success" role="alert">
                                       <h4 class="alert-heading">All Documents Analyzed. </h4>
                                       <p>You may open the new outputs from the sidemenu option. Click top left icon on this page to open side menu..</p>
+                                      <hr>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row" v-if="failure">
+                                <div class="col-sm-12">
+                                    <div class="alert alert-danger" role="alert">
+                                      <h4 class="alert-heading">Something went wrong!</h4>
+                                      <p>Seems like you did not provide enough words to analyze.</p>
                                       <hr>
 
                                     </div>

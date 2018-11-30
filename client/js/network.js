@@ -15,7 +15,7 @@ function get2DVectors(vectors, successCallback){
       });
 }
 
-function getTokenizedDocs(docs, successCallback){
+function getTokenizedDocs(docs, successCallback, failureCallback){
     var request = $.ajax({
         url: "/getDocsFromTexts",
         method: "POST",
@@ -29,12 +29,16 @@ function getTokenizedDocs(docs, successCallback){
       });
 
       request.fail(function( jqXHR, textStatus ) {
-        alert( "Request failed: " + textStatus );
+        if(failureCallback)
+            failureCallback(textStatus);
+          else{
+              alert( "Request failed: " + textStatus );
+          }
       });
 }
 
 // docs format: List[List[string(word)]]
-function getWord2VecClusters(docs, successCallback){
+function getWord2VecClusters(docs, successCallback, failureCallback){
     var request = $.ajax({
         url: "/api/getClustersWord2Vec",
         method: "POST",
@@ -48,11 +52,16 @@ function getWord2VecClusters(docs, successCallback){
       });
        
       request.fail(function( jqXHR, textStatus ) {
-        alert( "Request failed: " + textStatus );
+          if(failureCallback)
+            failureCallback(textStatus);
+          else{
+              alert( "Request failed: " + textStatus );
+          }
+
       });
 }
 
-function getLDAClusters(docs, successCallback){
+function getLDAClusters(docs, successCallback, failureCallback){
     var request = $.ajax({
         url: "/api/getLDAData",
         method: "POST",
@@ -66,6 +75,10 @@ function getLDAClusters(docs, successCallback){
       });
        
       request.fail(function( jqXHR, textStatus ) {
-        alert( "Request failed: " + textStatus );
+        if(failureCallback)
+            failureCallback(textStatus);
+          else{
+              alert( "Request failed: " + textStatus );
+          }
       });
 }

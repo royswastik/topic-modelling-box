@@ -41,7 +41,7 @@ function loadD3(){
                 'preparation']
             ];
 
-                getAnalysis("word2vec");
+                getAnalysis("LDA");
         });
 }
 
@@ -49,7 +49,7 @@ function getDocs(texts) {
   return window.documents = texts.map(x => x.split());
 }
 
-function getAnalysis(method, success) {
+function getAnalysis(method, success, fail) {
   let docs = window.documents;
   let fnc = x => x;
   if (method === "LDA") {
@@ -67,7 +67,7 @@ function getAnalysis(method, success) {
     if(success){
         success(resp);
     }
-  });
+  }, fail);
 }
 
 function loadVisualizations() {

@@ -208,7 +208,7 @@ def getWord2VecClusters(docs):
         best_silhoutte = -100
         labels = []
         print(len(texts) // 2)
-        for k in range(2, 10):
+        for k in range(2, min(10, len(texts)-1)):
             kmeans_model_tmp = KMeans(n_clusters=k, random_state=1).fit(embeddings)
             silhoutte = metrics.silhouette_score(embeddings, kmeans_model_tmp.labels_, metric='cosine')
             print("Silhoutte for k=" + str(k) + " is " + str(silhoutte))

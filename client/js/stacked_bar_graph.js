@@ -97,7 +97,7 @@ function renderBarGraph(topic_number, resp) {
    .attr("transform", function(d, i) { return "translate(-50," + (300 + i * 20) + ")"; });
   
 
-  var keys1 = ["Overall Term Frequency", "Estimated Term frequency within the selected topic"]; 
+  var keys1 = ["Overall Term Frequency/Overall Relevance", "Estimated Term frequency within the selected topic"];
   var svg1 = d3.select("#legendT").append("svg").attr("width", 500).attr("height", height).attr("id","legendsvg")
 var legend = svg1.append("g").attr("font-family", "sans-serif").attr("font-size", 10).attr("text-anchor", "end").selectAll("g").data(keys1.slice().reverse()).enter().append("g") //.attr("transform", function(d, i) { return "translate(0," + i * 20 + ")"; });
     .attr("transform", function (d, i) {

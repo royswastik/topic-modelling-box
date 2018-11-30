@@ -16,7 +16,7 @@ window.vueApp = new Vue({
         newDocsProccessed: '',
         showProcessed: false,
         settings: {
-            selectedMethod: 'word2Vec',
+            selectedMethod: "LDA",
             selectedDataset: 0,
             start1: 0,      //HappyDB
             end1: 10,        //HappyDB
@@ -61,7 +61,7 @@ window.vueApp = new Vue({
         saveChanges: function(){
             var self = this;
             self.success = false;
-            self.loading = true;
+            self.failure = false;
             if (this.settings.selectedDataset == 0){
                 if(this.settings.end1 - this.settings.start1 < 10){
                     alert("There needs to be atleast 5 documents(& <= 50) for Happy DB. And start index can not be greater than end.");
@@ -85,11 +85,14 @@ window.vueApp = new Vue({
                     }
                     window.documents = this.newDocsProccessed;
             }
-
+            self.loading = true;
 
             getAnalysis(this.settings.selectedMethod, function(resp){
                 self.success = true;
                 self.loading = false;
+            }, function (errorStatus) {
+                self.loading = false;
+                self.failure = true;
             });
         }
     },
