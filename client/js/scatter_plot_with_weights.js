@@ -4,7 +4,7 @@ function renderClusterAnalysis(resp) {
   var topic_vectors = resp["topic_vectors"];
   var bb = document.querySelector('#cluster')
     .getBoundingClientRect(),
-    width = 600;
+    width = 400;
   var height = 400;
   var margin = 80;
   var data = [];
@@ -97,18 +97,18 @@ function renderClusterAnalysis(resp) {
     .insert("circle")
     .attr("cx", width / 2)
     .attr("cy", height / 2)
-    .attr("opacity", function (d) {
-      return opacity(d.size);
-    })
     .attr("r", function (d) {
       return scale(d.size);
     })
+    .attr("id",function(d) {
+      return d.key
+    })
     .style("fill", function (d) {
-      return "#1f77b4";
+      return "#D0E3F0";
     })
     .on('mouseover', function (d, i) {
       renderBarGraph(d["key"], resp);
-      fade(d.c, .7);
+      fade(d["key"], 1);
     })
     .on('mouseout', function (d, i) {
       fadeOut();
@@ -124,7 +124,6 @@ function renderClusterAnalysis(resp) {
     .attr("cy", function (d) {
       return y(d.y);
     });
-
 
       // text label for the x axis
   svg.append("text")
@@ -144,20 +143,18 @@ function renderClusterAnalysis(resp) {
     .text("PC2");
 
 
-  function fade(c, opacity) {
+  function fade(key, opacity) {
     svg.selectAll("circle")
       .filter(function (d) {
-        return d.c != c;
-      })
-      .transition()
-      .style("opacity", opacity);
+        
+        return d.key == key;
+      }).
+      style("fill", "#C8423E")
   }
 
   function fadeOut() {
     svg.selectAll("circle")
       .transition()
-      .style("opacity", function (d) {
-        opacity(d.size);
-      });
+      .style("fill","#D0E3F0");
   }
 }
