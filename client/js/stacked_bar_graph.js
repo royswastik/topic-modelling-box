@@ -1,5 +1,6 @@
 function renderBarGraph(topic_number, resp) {
   d3.select("#stack-bar").remove();
+   d3.select("#legendsvg").remove();
   var final_data = [];
   var dataVal =resp["topic_word"][topic_number];
   for (var key in dataVal) {
@@ -17,7 +18,7 @@ function renderBarGraph(topic_number, resp) {
 
   var bb = document.querySelector('#stacked-bar')
     .getBoundingClientRect(),
-    width = bb.right - bb.left;
+    width = 600;
 
   var data = final_data;
   var height = data.length * 25;
@@ -26,7 +27,7 @@ function renderBarGraph(topic_number, resp) {
       top: 20,
       right: 20,
       bottom: 30,
-      left: 50
+      left: 80
     },
     width = +svg.attr("width") - margin.left - margin.right,
     height = +svg.attr("height") - margin.top - margin.bottom,
@@ -38,7 +39,7 @@ function renderBarGraph(topic_number, resp) {
     .rangeRound([0, width]); // .rangeRound([height, 0]);
 
   var z = d3.scaleOrdinal().range(["#C8423E", "#A1C7E0"]);
-  var keys = ["topic_frequency", "overall"];
+  var keys = ["topic_frequency", "overall_frequency"];
   data.sort(function (a, b) {
     return b.total - a.total;
   });
@@ -75,12 +76,17 @@ function renderBarGraph(topic_number, resp) {
     .append("text").attr("y", 2) //     .attr("y", 2)
     .attr("x", x(x.ticks().pop()) + 0.5) //     .attr("y", y(y.ticks().pop()) + 0.5)
     .attr("dy", "0.32em") //     .attr("dy", "0.32em")
-  var legend = g.append("g").attr("font-family", "sans-serif").attr("font-size", 10).attr("text-anchor", "end").selectAll("g").data(keys.slice().reverse()).enter().append("g") //.attr("transform", function(d, i) { return "translate(0," + i * 20 + ")"; });
+  
+
+
+
+  var svg1 = d3.select("#legendT").append("svg").attr("width", width).attr("height", height).attr("id","legendsvg")
+var legend = svg1.append("g").attr("font-family", "sans-serif").attr("font-size", 10).attr("text-anchor", "end").selectAll("g").data(keys.slice().reverse()).enter().append("g") //.attr("transform", function(d, i) { return "translate(0," + i * 20 + ")"; });
     .attr("transform", function (d, i) {
-      return "translate(-50," + (300 + i * 20) + ")";
+      return "translate(-50," + (0 + i * 20) + ")";
     });
-  legend.append("rect").attr("x", width - 19).attr("width", 19).attr("height", 19).attr("fill", z);
-  legend.append("text").attr("x", width - 24).attr("y", 9.5).attr("dy", "0.32em").text(function (d) {
+  legend.append("rect").attr("x", width - 25).attr("width", 60).attr("height", 19).attr("fill", z);
+  legend.append("text").attr("x", width - 24).attr("y", 18).attr("dy", "0.0em").text(function (d) {
     return d;
   });
 }

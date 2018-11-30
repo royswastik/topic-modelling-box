@@ -6,7 +6,7 @@ function renderClusterAnalysis(resp) {
     .getBoundingClientRect(),
     width = 600;
   var height = 400;
-  var margin = 40;
+  var margin = 80;
   var data = [];
 
   Object.keys(topic_vectors).forEach(function(key) {
@@ -124,6 +124,22 @@ function renderClusterAnalysis(resp) {
     .attr("cy", function (d) {
       return y(d.y);
     });
+
+      // text label for the x axis
+  svg.append("text")
+    .attr("class", "x label")
+    .attr("text-anchor", "end")
+    .attr("x", width)
+    .attr("y", height +40)
+    .text("PCA1");
+
+  svg.append("text")
+    .attr("class", "y label")
+    .attr("text-anchor", "end")
+    .attr("y", -50)
+    .attr("dy", ".75em")
+    .attr("transform", "rotate(-90)")
+    .text("PCA2");
 
 
   function fade(c, opacity) {
