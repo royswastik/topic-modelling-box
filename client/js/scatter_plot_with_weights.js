@@ -108,7 +108,7 @@ function renderClusterAnalysis(resp) {
     })
     .on('mouseover', function (d, i) {
       renderBarGraph(d["key"], resp);
-      fade(d.c, .1);
+      fade(d.c, .7);
     })
     .on('mouseout', function (d, i) {
       fadeOut();
@@ -133,7 +133,6 @@ function renderClusterAnalysis(resp) {
     .attr("x", width)
     .attr("y", height +40)
     .text("PC1");
-    .text("PCA1");
 
 
   svg.append("text")
