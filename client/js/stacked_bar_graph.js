@@ -1,5 +1,6 @@
 function renderBarGraph(topic_number, resp) {
   d3.select("#stack-bar").remove();
+  d3.select("#legendsvg").remove();
   var final_data = [];
   var dataVal =resp["topic_word"][topic_number];
   for (var key in dataVal) {
@@ -81,6 +82,16 @@ function renderBarGraph(topic_number, resp) {
     });
   legend.append("rect").attr("x", width - 19).attr("width", 19).attr("height", 19).attr("fill", z);
   legend.append("text").attr("x", width - 24).attr("y", 9.5).attr("dy", "0.32em").text(function (d) {
+    return d;
+  });
+
+  var svg1 = d3.select("#legendT").append("svg").attr("width", width).attr("height", height).attr("id","legendsvg")
+var legend = svg1.append("g").attr("font-family", "sans-serif").attr("font-size", 10).attr("text-anchor", "end").selectAll("g").data(keys.slice().reverse()).enter().append("g") //.attr("transform", function(d, i) { return "translate(0," + i * 20 + ")"; });
+    .attr("transform", function (d, i) {
+      return "translate(-50," + (0 + i * 20) + ")";
+    });
+  legend.append("rect").attr("x", width - 25).attr("width", 60).attr("height", 19).attr("fill", z);
+  legend.append("text").attr("x", width - 24).attr("y", 18).attr("dy", "0.0em").text(function (d) {
     return d;
   });
 }

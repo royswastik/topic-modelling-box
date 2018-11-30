@@ -56,7 +56,7 @@ function getAnalysis(method) {
     fnc = getLDAClusters;
 
   } else {
-    fnc = getWord2VecClusters;
+    fnc = getLDAClusters;
   }
   window.loadDFunc =  fnc;
   fnc(docs, resp => {
