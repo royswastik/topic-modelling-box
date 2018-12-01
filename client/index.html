@@ -195,13 +195,13 @@
 
                                                  <div class="form-group">
                                                     <label>Start Document Index</label>
-                                                    <input v-model="settings.start1" type="number" class="form-control" max="108337" min="0"  step="1" placeholder="0">
+                                                    <input v-model="settings.start1" type="number" class="form-control" max="100000" min="0"  step="1" placeholder="0">
                                                     <small class="form-text text-muted">Document Index starts from 0</small>
                                                   </div>
                                                  <div class="form-group">
                                                     <label>End Document Index</label>
-                                                    <input v-model="settings.end1" type="number" class="form-control" max="108337"  step="1" min="5" placeholder="5">
-                                                    <small class="form-text text-muted">Document Index ends at 108337. Total 108337 HappyDB documents.</small>
+                                                    <input v-model="settings.end1" type="number" class="form-control" max="100000"  step="1" min="5" placeholder="5">
+                                                    <small class="form-text text-muted">Document Index ends at 100000. Total 100000 HappyDB documents.</small>
                                                   </div>
                                              </div>
                                              <div v-bind:class="{ 'hidden': settings.selectedDataset != '1' }">
@@ -214,13 +214,13 @@
 
                                                  <div class="form-group">
                                                     <label>Start Document Index</label>
-                                                    <input v-model="settings.start2" type="number" class="form-control" max="1650" min="0"  step="1">
+                                                    <input v-model="settings.start2" type="number" class="form-control" max="337" min="0"  step="1">
                                                     <small class="form-text text-muted">Document Index starts from 0</small>
                                                   </div>
                                                  <div class="form-group">
                                                     <label>End Document Index</label>
-                                                    <input v-model="settings.end2" type="number" class="form-control" max="1650" min="1"  step="1">
-                                                    <small class="form-text text-muted">Document Index ends at 1650. Total 1650 Medium Articles.</small>
+                                                    <input v-model="settings.end2" type="number" class="form-control" max="338" min="1"  step="1">
+                                                    <small class="form-text text-muted">Document Index ends at 338. Total 338 Medium Articles.</small>
                                                   </div>
                                              </div>
                                              <div class="form-group" v-bind:class="{ 'hidden': settings.selectedDataset != '2' }">
