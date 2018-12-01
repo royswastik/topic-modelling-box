@@ -19,8 +19,8 @@ window.vueApp = new Vue({
         settings: {
             selectedMethod: "LDA",
             selectedDataset: 0,
-            start1: 0,      //HappyDB
-            end1: 10,        //HappyDB
+            start1: 11,      //HappyDB
+            end1: 21,        //HappyDB
             start2: 0,      //Medium
             end2: 5,        //Medium
             ldaTopicThreshold: 0,
