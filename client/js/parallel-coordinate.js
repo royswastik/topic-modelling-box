@@ -19,7 +19,7 @@ function loadParallelCoordinate(resp){
 
 
     // Extract the list of dimensions and create a scale for each.
-    var cars = generateParallelCoordinateData(resp, 0, 0);
+    var cars = generateParallelCoordinateData(resp, window.vueApp.params.topicThreshold, window.vueApp.params.wordThreshold);
     // var axisD = d3V3.svg.axis().orient("left").ticks(Object.keys(resp["document_topic"]).length),
     var axisD = d3V3.svg.axis().orient("left").tickValues(Object.keys(resp["document_topic"]).map(x => parseInt(x))),
         axisT = d3V3.svg.axis().orient("left").tickValues(resp["topics"].map(x => parseInt(x))),

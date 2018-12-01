@@ -1,7 +1,7 @@
 function loadParallelCoordinatesHC(resp){
 
 
-        let data = generateParallelCoordinateDataHC(resp, 0, 0);
+        let data = generateParallelCoordinateDataHC(resp, window.vueApp.params.topicThreshold, window.vueApp.params.wordThreshold);
         Highcharts.chart('pc-container', {
             chart: {
                 type: 'spline',

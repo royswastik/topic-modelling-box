@@ -154,6 +154,13 @@
                                                 </select>
                                               </div>
                                              <div v-bind:class="{ 'hidden': settings.selectedDataset != '0' }">
+                                                 <div v-if="(settings.end1 - settings.start1) < 10" class="alert alert-warning" role="alert">
+                                                      <p>There needs to be at least 10 documents for HappyDB.</p>
+                                                 </div>
+                                                 <div v-if="(settings.end1 - settings.start1) > 50" class="alert alert-warning" role="alert">
+                                                      <p>Due to server constraints, please select less than 50 documents for HappyDB.</p>
+                                                 </div>
+
                                                  <div class="form-group">
                                                     <label>Start Document Index</label>
                                                     <input v-model="settings.start1" type="number" class="form-control" max="108337" min="0"  step="1" placeholder="0">
@@ -162,10 +169,17 @@
                                                  <div class="form-group">
                                                     <label>End Document Index</label>
                                                     <input v-model="settings.end1" type="number" class="form-control" max="108337"  step="1" min="5" placeholder="5">
-                                                    <small class="form-text text-muted">Document Index ends at 1650. Total 1650 Medium Articles.</small>
+                                                    <small class="form-text text-muted">Document Index ends at 108337. Total 108337 HappyDB documents.</small>
                                                   </div>
                                              </div>
                                              <div v-bind:class="{ 'hidden': settings.selectedDataset != '1' }">
+                                                 <div v-if="(settings.end2 - settings.start2) < 5" class="alert alert-warning" role="alert">
+                                                      <p>There needs to be at least 5 documents for Medium articles.</p>
+                                                 </div>
+                                                 <div v-if="(settings.end2 - settings.start2) > 30" class="alert alert-warning" role="alert">
+                                                      <p>Due to server constraints, please select less than 30 documents for Medium articles.</p>
+                                                 </div>
+
                                                  <div class="form-group">
                                                     <label>Start Document Index</label>
                                                     <input v-model="settings.start2" type="number" class="form-control" max="1650" min="0"  step="1" placeholder="0">
@@ -195,6 +209,24 @@
 
 
                                     </div>
+
+                                    <div class="card note-card">
+                                         <div class="card-body">
+                                             <div class="form-group">
+                                                 <label>Topic to document threshold</label>
+                                                 <input v-model="params.topicThreshold" type="number" step="0.001" class="form-control" max="1" min="0">
+                                                 <small>For LDA: It denotes probability score above which a topic would be considered to be in a document. </small>
+                                                 <small>For Kmeans+Word2Vec: It denotes cosine similarity score between topic & document above which a topic would be considered to be in a document. </small>
+                                             </div>
+                                             <div class="form-group">
+                                                 <label>Word to topic threshold</label>
+                                                 <input v-model="params.wordThreshold" type="number"  step="0.001" class="form-control" max="1" min="0">
+                                                 <small>For LDA: It denotes probability score above which a word would be considered to be in a topic. </small>
+                                                 <small>For Kmeans+Word2Vec: It denotes cosine similarity score between word & topic above which a word would be considered to be in a topic. </small>
+                                             </div>
+                                         </div>
+                                    </div>
+
                                 </div>
                                 <div class="col-sm-6">
                                     <div id="new-documents" v-bind:class="{ 'hidden': (settings.selectedDataset != '2') }">

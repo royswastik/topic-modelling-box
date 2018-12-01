@@ -25,6 +25,10 @@ window.vueApp = new Vue({
             end2: 5,        //Medium
             ldaTopicThreshold: 0,
             word2VecThreshold: 0
+        },
+        params: {
+            topicThreshold: 0.02,
+            wordThreshold: 0.02
         }
     },
     methods: {
