@@ -80,6 +80,7 @@ function initPage1(resp) {
 
 
 function initPage2(resp) {
+    $("#speciescollapsible").html("");
   renderClusterForceLayout(resp);
 
 }
@@ -92,6 +93,6 @@ function initPage3(resp){
 }
 
 function initPage4(){
-    $("#overall-wc").html();
+    $("#overall-wc").html("");
     loadWordCloud(window.global_data);
 }

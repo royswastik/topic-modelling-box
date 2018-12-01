@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-    <title>LDAVis Duplex | Data Visualization</title>
+    <title>LDAvis Duplex | Data Visualization</title>
     <link rel="stylesheet" href="style/main.css" />
       <link rel="stylesheet" href="style/main.scss">
       <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css">
@@ -60,13 +60,21 @@
                 <div class="pusher">
                     <div id="container-fluid" style=" margin-bottom: 50px;">
                             <nav id="navbar-example2" class="navbar navbar-dark bg-dark bg-light">
-                            <a  id="toggle-sidebar" class="navbar-brand" href="#"><i class="fas fa-bars"></i> &nbsp; LDAVis Duplex</a>
+                            <a  id="toggle-sidebar" class="navbar-brand" href="#"><i class="fas fa-bars"></i> &nbsp; LDAvis Duplex</a>
                             <!--<a style="cursor:pointer; color:white;">Toggle Menu</a>-->
                             </nav>
                     </div>
                 <!-- Site content !-->
                     <div class="container">
                         <div class="row" id="page1" v-bind:class="{ 'hidden': selectedPage != 1 }">
+                          <div class="text-center">
+                            <h3 class="text-center">Topic Word Relationship: Base System</h3>
+                            <p class="text-center">
+                                The two main core functionalities are presented in two panels. On the left panel, it is about giving visual features of the topics. The areas of the circles are proportional to the relative prevalences of the topics in the corpus.
+                                On the right panel which is created with a horizontal stacked bar chart that is populated when the user clicks a topic from the left panel. There are two key things highlighted in this visualization. First is the relevance of the words for a topic and are ordered by these scores and the second is the overall frequency distribution of the word in the corpora.
+                            </p>
+                        </div>
+
                            <div class="col-md-6" id="cluster">
                            </div>
                             <div class="col-md-1">
@@ -83,7 +91,17 @@
 
 
                         <div class="container" id="inverse-word-topic">
+
                             <div class="row" id="page2" v-bind:class="{ 'hidden': selectedPage != 2 }">
+                                <div class="text-center">
+                                         <h3 class="text-center">Topic Word Relationship</h3>
+                                        <p class="text-center">
+                                            This layout visualizes the inverse word to topic relationship. Although, the base LDAvis system provides information about what words are contained in a topic, but it fails to visualize what topics does a word belong to.
+
+            The node-link diagram below shows all words with a relevance score greater than GAMMA(as in settings page). If you click a word, it will show all the topics where the word belong.
+                                        </p>
+                                </div>
+
                                 <div class="col-md-12" id="speciescollapsible">
                                     
                                 </div>
@@ -91,6 +109,13 @@
                         </div>
 
                         <div id="page3" v-bind:class="{ 'hidden': selectedPage != 3 }">
+                            <div class="text-center">
+                                <h3 class="text-center">Correlation Analysis</h3>
+                                <p class="text-center">
+                                    The first visualization gives the scores of the word distribution in a sorted order over the corpus. This will also tell about the distribution of words over topics, documents and overall corpus.
+                                    The second implementation of the parallel coordinate system was done in highcharts where it shows association flow between document, topic, and word.
+                                </p>
+                            </div>
                             <div id="parallel-coordinate-vis">
 
                             </div>
@@ -99,6 +124,13 @@
                             </div>
                         </div>
                         <div id="page4" v-bind:class="{ 'hidden': selectedPage != 4 }">
+                           <div class="text-center">
+                                <h3 class="text-center">Word Analysis</h3>
+                                <p class="text-center">
+                                    Here Each word is represented based on the relevance it had with a topic. The data used for this visualization came from the topic word map and the size of words was based on relevance. Word Cloud show topics in different sizes based on relevance to topic and in different colors to enhance visual aesthetics. Also hovering on each word gives the overall score between a word and its frequency distribution over the corpus.
+                                </p>
+                            </div>
+
                             <div id="overall-wc" style="height: 300px;"></div>
                             <div class="row" id="topic-wcs">
 
@@ -106,7 +138,7 @@
                         </div>
                         <div id="page5" v-bind:class="{ 'hidden': selectedPage != 5 }">
                             <h1 class="ldaVisLogo text-center">
-                                LDAVis Duplex
+                                LDAvis Duplex
                             </h1>
                             <div class="logo-bottom"></div>
                             <h3>Settings</h3>

@@ -74,6 +74,7 @@ function renderCluster(cluster_data, d3){
   var radius = 200;
   var dendogramContainer = "speciescollapsible";
 
+
   var rootNodeSize = 6;
   var levelOneNodeSize = 3;
   var levelTwoNodeSize = 3;

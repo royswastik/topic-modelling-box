@@ -29,7 +29,7 @@ window.vueApp = new Vue({
         params: {
             topicThreshold: 0.02,
             wordThreshold: 0.02,
-            wordOverallThreshold: 0.1,
+            wordOverallThreshold: 0,
         }
     },
     methods: {
