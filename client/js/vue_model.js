@@ -12,6 +12,7 @@ window.vueApp = new Vue({
         selectedMap: 1,
         success: false,
         loading: false,
+        failure: false,
         newDoc: '',
         newDocsProccessed: '',
         showProcessed: false,
