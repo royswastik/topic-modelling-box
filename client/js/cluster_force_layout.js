@@ -43,7 +43,7 @@ function renderClusterForceLayout(data){
 
   	var count=0;
   	for(var key in final_dict){
-  		if (final_dict.hasOwnProperty(key)) {
+  		if (final_dict.hasOwnProperty(key) && (data["overall_word"][key] && data["overall_word"][key] > window.vueApp.params.wordOverallThreshold)) {
   			count = count + 1;
   			var hash = {};
   			hash["order"] = count;
@@ -73,7 +73,6 @@ function renderClusterForceLayout(data){
 function renderCluster(cluster_data, d3){
   var radius = 200;
   var dendogramContainer = "speciescollapsible";
-  var dendogramDataSource = "forestSpecies.json";
 
   var rootNodeSize = 6;
   var levelOneNodeSize = 3;

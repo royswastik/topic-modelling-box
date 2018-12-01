@@ -3,7 +3,7 @@ window.vueApp = new Vue({
     data: {
         message: 'Hello user!',
         noneSelected: true,
-        selectedPage: 5,
+        selectedPage: 2,
         playerDetail: {
             name: "<Player Name>"
         },
@@ -28,7 +28,8 @@ window.vueApp = new Vue({
         },
         params: {
             topicThreshold: 0.02,
-            wordThreshold: 0.02
+            wordThreshold: 0.02,
+            wordOverallThreshold: 0.1,
         }
     },
     methods: {

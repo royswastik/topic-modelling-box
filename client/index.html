@@ -213,16 +213,22 @@
                                     <div class="card note-card">
                                          <div class="card-body">
                                              <div class="form-group">
-                                                 <label>Topic to document threshold</label>
+                                                 <label>Topic to document threshold (ALPHA)</label>
                                                  <input v-model="params.topicThreshold" type="number" step="0.001" class="form-control" max="1" min="0">
                                                  <small>For LDA: It denotes probability score above which a topic would be considered to be in a document. </small>
                                                  <small>For Kmeans+Word2Vec: It denotes cosine similarity score between topic & document above which a topic would be considered to be in a document. </small>
                                              </div>
                                              <div class="form-group">
-                                                 <label>Word to topic threshold</label>
+                                                 <label>Word to topic threshold (BETA)</label>
                                                  <input v-model="params.wordThreshold" type="number"  step="0.001" class="form-control" max="1" min="0">
                                                  <small>For LDA: It denotes probability score above which a word would be considered to be in a topic. </small>
                                                  <small>For Kmeans+Word2Vec: It denotes cosine similarity score between word & topic above which a word would be considered to be in a topic. </small>
+                                             </div>
+                                             <div class="form-group">
+                                                 <label>Overall Word threshold (GAMMA)</label>
+                                                 <input v-model="params.wordOverallThreshold" type="number"  step="0.001" class="form-control" max="1" min="0">
+                                                 <small>For LDA: It denotes probability score above which a word would be considered to be shown in inverse-word-topic relationship visualization. </small>
+                                                 <small>For Kmeans+Word2Vec: It denotes cosine similarity score between word & overall corpus vector above which a word would be considered to be shown in inverse-word-topic relationship visualization. </small>
                                              </div>
                                          </div>
                                     </div>
