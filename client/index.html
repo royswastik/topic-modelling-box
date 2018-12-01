@@ -160,7 +160,7 @@
                                 <div class="col-sm-12">
                                     <div class="alert alert-danger" role="alert">
                                       <h4 class="alert-heading">Something went wrong!</h4>
-                                      <p>Seems like you did not provide enough words to analyze.</p>
+                                      <p>Seems like you did not provide enough words to analyze. Or, the documents are too big.</p>
                                       <hr>
 
                                     </div>
@@ -205,21 +205,21 @@
                                                   </div>
                                              </div>
                                              <div v-bind:class="{ 'hidden': settings.selectedDataset != '1' }">
-                                                 <div v-if="(settings.end2 - settings.start2) < 5" class="alert alert-warning" role="alert">
-                                                      <p>There needs to be at least 5 documents for Medium articles.</p>
+                                                 <div v-if="(settings.end2 - settings.start2) < 1" class="alert alert-warning" role="alert">
+                                                      <p>There needs to be at least 1 documents for Medium articles.</p>
                                                  </div>
-                                                 <div v-if="(settings.end2 - settings.start2) > 30" class="alert alert-warning" role="alert">
-                                                      <p>Due to server constraints, please select less than 30 documents for Medium articles.</p>
+                                                 <div v-if="(settings.end2 - settings.start2) > 2" class="alert alert-warning" role="alert">
+                                                      <p>Due to server constraints, please select less than 2 documents for Medium articles.</p>
                                                  </div>
 
                                                  <div class="form-group">
                                                     <label>Start Document Index</label>
-                                                    <input v-model="settings.start2" type="number" class="form-control" max="1650" min="0"  step="1" placeholder="0">
+                                                    <input v-model="settings.start2" type="number" class="form-control" max="1650" min="0"  step="1">
                                                     <small class="form-text text-muted">Document Index starts from 0</small>
                                                   </div>
                                                  <div class="form-group">
                                                     <label>End Document Index</label>
-                                                    <input v-model="settings.end2" type="number" class="form-control" max="1650" min="5"  step="1" placeholder="5">
+                                                    <input v-model="settings.end2" type="number" class="form-control" max="1650" min="1"  step="1">
                                                     <small class="form-text text-muted">Document Index ends at 1650. Total 1650 Medium Articles.</small>
                                                   </div>
                                              </div>

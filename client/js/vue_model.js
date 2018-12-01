@@ -22,7 +22,7 @@ window.vueApp = new Vue({
             start1: 11,      //HappyDB
             end1: 21,        //HappyDB
             start2: 0,      //Medium
-            end2: 5,        //Medium
+            end2: 1,        //Medium
             ldaTopicThreshold: 0,
             word2VecThreshold: 0
         },
@@ -77,11 +77,12 @@ window.vueApp = new Vue({
                     return;
                 }
             } else if (this.settings.selectedDataset == 1){
-                if(this.settings.end2 - this.settings.start2 < 5){
-                    alert("There needs to be atleast 5 documents(& <= 30) for Medium Articles. And start index can not be greater than end.");
+                if(this.settings.end2 - this.settings.start2 < 1){
+
+                    alert("There needs to be atleast 1 document for Medium Articles. And start index can not be greater than end.");
                     return;
-                } else if(this.settings.end2 - this.settings.start2 > 30){
-                    alert("There needs to be less than 30 documents for Medium Articles.");
+                } else if(this.settings.end2 - this.settings.start2 > 2){
+                    alert("There needs to be less than 2 documents for Medium Articles.");
                     return;
                 }
             } else if (this.settings.selectedDataset == 2){

@@ -49,7 +49,7 @@ def get2DVectors():
 def getWord2Vec_TopicClusters():
     post = request.get_json()
     print(post)
-    start_page = post["start"]
+    start_page = int(post["start"])
     end_page = int(post["end"])
     db_selected = int(post["selected"])
     if db_selected == 0:
@@ -78,7 +78,7 @@ def getLDA_TopicClusters():
     print(post)
     start_page = int(post["start"])
     end_page = int(post["end"])
-    db_selected = post["selected"]
+    db_selected = int(post["selected"])
     if db_selected == 0:
         df = pd.read_csv("cleaned_hm.csv")
         dfRange = df.iloc[start_page:end_page]
